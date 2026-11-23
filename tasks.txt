@@ -1,0 +1,138 @@
+================================================================================
+ SANJEEVANI — HOME PAGE TASK PLAN & STATUS
+ Reference: docs/PROJECT_CONTEXT.md
+================================================================================
+
+[x] EPIC 1 — PROJECT SETUP & DESIGN SYSTEM
+────────────────────────────────────────
+ [x] 1.1 Scaffold Vite + React project in frontend/
+ [x] 1.2 Install dependencies: tailwindcss, @tailwindcss/vite, react-router-dom, @fontsource fonts
+ [x] 1.3 Configure Tailwind (design tokens: Brand Blue #1A56DB, neutral grays, semantic tokens)
+ [x] 1.4 Setup typography (@fontsource/plus-jakarta-sans for headings, @fontsource/inter for body)
+ [x] 1.5 Create src/styles/global.css with resets, design tokens, visible focus ring, reduced motion
+ [x] 1.6 Create full folder structure with image and font assets directories
+ [x] 1.7 Set up React Router with code-split lazy routes in App.jsx
+ [x] 1.8 Create placeholder page components for auth, customer, vendors, prescription upload
+ [x] 1.9 Verify production build (✓ built in 690ms) and start dev server
+
+[x] EPIC 2 — LAYOUT SHELL (HEADER, NAVBAR, CATEGORY BAR, FOOTER)
+─────────────────────────────────────────────────────────────
+ [x] 2.1 TopStrip component (Continuous infinite live marquee with pause-on-hover)
+ [x] 2.2 Navbar component:
+       - Logo ("S" + "Sanjeevani")
+       - LocationSelector with Nepal cities (Kathmandu, Lalitpur, Pokhara, etc.)
+       - SearchBar with Medicines / Equipment mode toggle
+       - Account dropdown with links
+       - Cart icon with dynamic item count badge
+       - Language switcher dropdown (English / नेपाली)
+       - Functional ARIA Accessibility icon + toolbar (Keyboard nav, contrast, font scale, dyslexia font, link highlights)
+       - Mobile hamburger menu
+ [x] 2.3 CategoryBar component (Horizontal smooth-scroller with categories and arrows)
+ [x] 2.4 Footer component (4 columns, QR Code placeholder, Khalti badge, legal healthcare disclaimer)
+ [x] 2.5 MainLayout wrapper component with skip-to-content accessibility link
+
+[x] EPIC 3 — HERO SECTION, QUICK ACTIONS & PROMOTIONAL BANNERS
+───────────────────────────────────────────────────────────
+ [x] 3.1 Reusable Carousel component (mouse click & drag, arrows, dots, wheel hijack removed)
+ [x] 3.2 HeroBanner section (4 realistic photographic banners, ~570x240, 3 visible on desktop + peek scroll)
+ [x] 3.3 QuickActions grid (Order Medicines, Rent Equipment, Upload Rx, Nearby Pharmacies)
+ [x] 3.4 Large Format Khalti Banner (~851x296 format with excited character photo and Nepali script copy)
+ [x] 3.5 Large Format Promotional Banners (~851x296 format with realistic human characters between sections)
+ [x] 3.6 MembershipBanner (Sanjeevani Plus ~851x296 format with realistic Nepali Asian family photo)
+
+[x] EPIC 4 — PRODUCT SECTIONS & MOCK DATA
+──────────────────────────────────────
+ [x] 4.1 Mock data files (medicines, equipment, healthConcerns, brands, deals, articles)
+ [x] 4.2 ProductCard component (isolated pure white PNG-style background, Rx Only badge + Upload Rx CTA)
+ [x] 4.3 EquipmentCard component (Rental rate/day, refundable deposit, blue "Select Rental Dates" button)
+ [x] 4.4 ShopByHealthConcern (7 large condition cards, scrollable with realistic photos)
+ [x] 4.5 NewLaunches & Trending Medicines carousel
+ [x] 4.6 RentEquipmentSection carousel
+ [x] 4.7 DealsOfTheDay section (with live countdown clock: hours:minutes:seconds)
+ [x] 4.8 FeaturedBrands grid (authentic Nepali manufacturers: DJPL, Lomus, NPL, Omnica, etc.)
+ [x] 4.9 SpotlightProducts ("Ads In The Spotlight" with ceiling hanging lamp fixture and conical light beam)
+ [x] 4.10 WellnessEssentials ("Wellness Essentials of the Week")
+
+[x] EPIC 5 — TRUST, HOW IT WORKS, CTA & CONTENT SECTIONS
+─────────────────────────────────────────────────────
+ [x] 5.1 HowItWorks section (Dual step-by-step flows: BUY medicines vs. RENT equipment)
+ [x] 5.2 VerifiedVendors section (Local pharmacies in Kathmandu, Lalitpur, Pokhara)
+ [x] 5.3 PrescriptionCtaBand (~300px format with real doctor at clinical desk photo background)
+ [x] 5.4 HealthArticles section (Storage guidelines, wheelchair guide, sore prevention)
+ [x] 5.5 CustomerReviews section (mouse draggable + auto-advancing with hover-pause)
+ [x] 5.6 TrustSection ("Say Goodbye to All Your Healthcare Worries With Sanjeevani!")
+
+[x] EPIC 6 — RESPONSIVE, ACCESSIBILITY & POLISH
+────────────────────────────────────────────
+ [x] 6.1 Reusable Skeleton preloader components in src/components/ui/Skeleton.jsx
+ [x] 6.2 WCAG contrast, minimum 16px body font size, visible focus rings
+ [x] 6.3 Live functional ARIA toolbar modifying document styles in real-time
+ [x] 6.4 Zero build errors on `npm run build` (✓ built in 690ms)
+ 
+[x] EPIC 7 — REFINEMENTS, NEW USER BANNERS & REVIEW DRAG EXPERIENCE
+──────────────────────────────────────────────────────────────────
+ [x] 7.1 Replace composite banners with exact user-uploaded 2048px high-resolution graphics:
+       - Khalti 10% Cashback with girl and official Khalti branding (`banner_khalti_10cashback.png`)
+       - "Deals you Manifested are Herer!" campaign banner (`banner_deals_manifested_box.png`)
+       - "Zero Delivery Fee on Orders Above Rs. 499!" scooter banner (`banner_free_delivery_scooter.png`)
+       - "Become a PLUS Member" authentic family banner (`banner_plus_member_family.png`)
+ [x] 7.2 Customer reviews carousel overhaul:
+       - Continuous smooth gliding animation (requestAnimationFrame pixel-by-pixel glide)
+       - Pauses immediately on hover or click so user can read comfortably
+       - Resumes gliding automatically when mouse leaves
+       - Dragging with mouse wraps infinitely without ever hitting blank space or dead ends
+       - Clean section header with "Story X of Y" counter badge removed
+ [x] 7.3 Banner graphic spelling correction:
+       - Patched banner_deals_manifested_box.png spelling from "Herer!" to "Here!" with natural letter spacing and clean gradient fill
+ [x] 7.4 Verified Vite production build (✓ built in 647ms, 0 errors)
+ 
+[x] EPIC 8 — DISEASE/CATEGORY BANNERS, SEAMLESS CAROUSEL LOOP, RUN ADS FOOTER & CONTINUOUS REVIEWS
+──────────────────────────────────────────────────────────────────────────────────────────────────
+ [x] 8.1 Category Health Banners Carousel added after "Ads in the Spotlight":
+       - Styled identically to Hero Carousel (~570px cards with realistic photography and high contrast overlays)
+       - 4 condition-specific designs: Skin, Hair & Nails; Stomach & Digestion; Heart & Vital Signs; First Aid & Emergency Kits
+       - Category links to `/medicines?category=...`
+ [x] 8.2 Carousel.jsx Seamless Infinite Forward Loop:
+       - Duplicated children with infinite forward scrolling so slide 4 joins smoothly into slide 1
+       - Completely eliminated the jarring rewind jump back to slide 0
+ [x] 8.3 Footer "Run Ads on Sanjeevani" Section:
+       - Added prominent partnership placeholder banner in Footer with "Advertise With Us" action
+ [x] 8.4 Customer Reviews Continuous Animation:
+       - Hardware-accelerated GPU translate3d marquee running continuously at all times
+       - Stops immediately on hover so users can comfortably read
+       - Resumes instantly upon mouse leave
+       - Seamless infinite loop with zero blank spaces
+ [x] 8.5 Production build verified (✓ built in 630ms, 0 errors)
+ 
+[x] EPIC 9 — RUN ADS BANNER REPLACEMENT, CALM REVIEWS CAROUSEL, UK/NEPAL FLAGS & ARIA ICON UPDATE
+─────────────────────────────────────────────────────────────────────────────────────────────────
+ [x] 9.1 Footer "Run Ads on Sanjeevani" Banner:
+       - Replaced text block with user-uploaded high-impact graphic banner (laptop, 3D megaphone, chart bars, "Advertise Now ->")
+       - Mapped to `banner_run_ads_sanjeevani.jpg`
+ [x] 9.2 Customer Reviews (Feedback) Section Overhaul:
+       - Reduced speed to calm, comfortable auto-advance interval (5.5s)
+       - Added side-by-side navigation arrows to step left and right with mouse clicks, exact like hero section
+       - Enabled smooth mouse dragging left and right
+       - Infinite forward loop connects first review from the last smoothly
+ [x] 9.3 Language Preference Flags:
+       - Added UK flag (`🇬🇧`) for English (EN)
+       - Added Nepal flag (`🇳🇵`) for Nepali (ने / नेपाली) in both the header button and dropdown menu
+ [x] 9.4 ARIA Accessibility Icon Update:
+       - Replaced icon with user-provided universal figure (head, outstretched arms, separated legs)
+       - Removed the blue circular background
+       - Styled with `fill="currentColor"` so it shares the exact same color tone (`text-gray-700 hover:text-[var(--color-primary)]`) as other header icons
+ [x] 9.5 Verified production build (✓ built in 849ms, 0 errors)
+ 
+[x] EPIC 10 — BANNER RELOCATIONS, EQUIPMENT RENT BANNER & NAV LANGUAGE RESTORATION
+────────────────────────────────────────────────────────────────────────────────
+ [x] 10.1 First Banner Relocation:
+        - Added "Medical Equipment on Rent" (`banner_medical_equipment_rent.jpg`) immediately after "Featured Pharmaceutical Brands"
+        - Direct link to `/equipment`
+ [x] 10.2 Second Banner Relocation:
+        - Removed existing "Run Ads on Sanjeevani" banner from Footer
+        - Placed the updated "Run Ads on Sanjeevani" banner (`banner_run_ads_sanjeevani.jpg`) immediately after "What our customers have to say" (Customer Reviews)
+ [x] 10.3 Navbar Language Selector Refinements:
+        - Restored original Globe SVG icon on the trigger button
+        - Dropdown menu uses real colored flag emojis: 🇬🇧 English and 🇳🇵 नेपाली (without "GB" or "NP" abbreviations)
+ [x] 10.4 Verified production build (✓ built in 661ms, 0 errors)
+================================================================================
