@@ -1,62 +1,50 @@
 /**
  * MOCK DATA: banners.js
- * Realistic banner data for Sanjeevani
- * Features real medical imagery, patient care settings, equipment photos.
- * Clean commercial healthcare visuals.
+ * Highlighting hero banners for Sanjeevani
+ * Features 4 high-definition photographic banners for Nepal healthcare:
+ * 1. A Healthier Tomorrow Starts Today (Family)
+ * 2. स्वस्थ जीवन, सुखी परिवार (Healthy living & nutrition)
+ * 3. Healthcare Made Easier, Every Day (Medicines cart & delivery)
+ * 4. स्वस्थ रहौं, अघि बढौं (Heart vital care & verified dispensing)
  */
+
+import heroBanner1 from '../assets/images/banners/hero_banner_1_healthier_tomorrow.png';
+import heroBanner2 from '../assets/images/banners/hero_banner_2_sukhi_pariwar.png';
+import heroBanner3 from '../assets/images/banners/hero_banner_3_healthcare_easier.png';
+import heroBanner4 from '../assets/images/banners/hero_banner_4_swastha_rahau.png';
 
 export const HERO_BANNERS = [
   {
     id: 'hero-1',
-    tag: 'Licensed Community Pharmacies',
-    headline: 'Genuine Medicines & Care Supplies Delivered Fast',
-    subline: 'Order verified OTC & prescription medications directly from licensed pharmacies in Nepal.',
-    badge: '100% Genuine Batch Tracked',
-    ctaText: 'Order Medicines',
-    ctaLink: '/medicines',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80',
-    overlay: 'from-blue-950/90 via-blue-900/80 to-transparent',
-    buttonColor: 'bg-white text-blue-950 hover:bg-blue-50',
-    badgeBg: 'bg-blue-500/30 text-blue-200 border-blue-400/40',
+    headline: 'A Healthier Tomorrow Starts Today',
+    subline: 'Genuine batch-tracked medicines and healthcare supplies delivered directly across Nepal.',
+    image: heroBanner1,
+    link: '/medicines',
+    alt: 'A Healthier Tomorrow Starts Today — Sanjeevani Healthcare',
   },
   {
     id: 'hero-2',
-    tag: 'Caregiver & Home Support',
-    headline: 'Rent Hospital Beds, Wheelchairs & Concentrators',
-    subline: 'Pay low daily rental rates for chosen dates with 100% refundable security deposit protection.',
-    badge: 'Refundable Escrow Deposit',
-    ctaText: 'Rent Equipment',
-    ctaLink: '/equipment',
-    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80',
-    overlay: 'from-teal-950/90 via-teal-900/80 to-transparent',
-    buttonColor: 'bg-white text-teal-950 hover:bg-teal-50',
-    badgeBg: 'bg-teal-500/30 text-teal-200 border-teal-400/40',
+    headline: 'स्वस्थ जीवन, सुखी परिवार',
+    subline: 'Complete wellness, balanced nutrition and essential healthcare devices for your family.',
+    image: heroBanner2,
+    link: '/medicines',
+    alt: 'स्वस्थ जीवन, सुखी परिवार — सञ्जीवनी स्वास्थ्य सेवा',
   },
   {
     id: 'hero-3',
-    tag: 'Safe Rx Processing',
-    headline: 'Snap & Upload Your Doctor Prescription',
-    subline: 'Licensed pharmacists review your prescription, verify dosages, and prepare safe dispensing.',
-    badge: 'Confidential & Fast Check',
-    ctaText: 'Upload Prescription',
-    ctaLink: '/upload-prescription',
-    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80',
-    overlay: 'from-indigo-950/90 via-indigo-900/80 to-transparent',
-    buttonColor: 'bg-amber-400 text-gray-950 hover:bg-amber-300',
-    badgeBg: 'bg-indigo-500/30 text-indigo-200 border-indigo-400/40',
+    headline: 'Healthcare Made Easier, Every Day',
+    subline: 'Order verified OTC medications, medical devices and daily care essentials in one place.',
+    image: heroBanner3,
+    link: '/medicines',
+    alt: 'Healthcare Made Easier, Every Day — Sanjeevani Nepal',
   },
   {
     id: 'hero-4',
-    tag: 'Nearby Pharmacy Discovery',
-    headline: 'Connect with Verified Medical Stores in Your City',
-    subline: 'Find licensed pharmacies and medical device dealers in Kathmandu, Lalitpur, Pokhara & beyond.',
-    badge: 'Citywide Network',
-    ctaText: 'Find Nearby Stores',
-    ctaLink: '/vendors',
-    image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1200&auto=format&fit=crop&q=80',
-    overlay: 'from-slate-950/90 via-slate-900/80 to-transparent',
-    buttonColor: 'bg-white text-slate-950 hover:bg-slate-100',
-    badgeBg: 'bg-slate-500/30 text-slate-200 border-slate-400/40',
+    headline: 'स्वस्थ रहौं, अघि बढौं',
+    subline: 'Connect with verified pharmacies, safe prescription verification, and urgent healthcare supplies.',
+    image: heroBanner4,
+    link: '/medicines',
+    alt: 'स्वस्थ रहौं, अघि बढौं — सञ्जीवनी नेपाल',
   },
 ];
 

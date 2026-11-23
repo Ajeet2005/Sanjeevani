@@ -1,17 +1,25 @@
 /*
- * NewLaunches.jsx — Trending medicines and new releases
+ * NewLaunches.jsx — "Trending Medicines Near You"
+ *
+ * Updated as per user specification:
+ * Replaced horizontal scroller with a static 2 rows × 4 items grid (8 products total),
+ * preserving our clean Sanjeevani ProductCard design (Rx badges, pricing in Rs., Add/Upload buttons).
  */
-import Carousel from '../ui/Carousel.jsx';
+
 import ProductCard from './ProductCard.jsx';
 import { MEDICINES } from '../../data/medicines.js';
 import { Link } from 'react-router-dom';
 
-export default function NewLaunches({ title = 'New Launches & Trending Medicines' }) {
+export default function NewLaunches({ title = 'Trending Medicines Near You' }) {
+  // Exactly 8 items: 4 items in row 1, 4 items in row 2 on desktop
+  const displayMedicines = MEDICINES.slice(0, 8);
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-label={title}>
-      <div className="flex items-center justify-between mb-5">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" aria-label={title}>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 font-[var(--font-heading)]">
+          <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-[var(--font-heading)]">
             {title}
           </h2>
           <p className="text-xs sm:text-sm text-gray-500">
@@ -30,17 +38,12 @@ export default function NewLaunches({ title = 'New Launches & Trending Medicines
         </Link>
       </div>
 
-      <Carousel
-        showArrows={true}
-        showDots={false}
-        totalItems={MEDICINES.length}
-        itemWidth={270}
-        ariaLabel={title}
-      >
-        {MEDICINES.map((prod) => (
-          <ProductCard key={prod.id} product={prod} />
+      {/* 2 Rows × 4 Columns Grid (8 Products) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {displayMedicines.map((prod) => (
+          <ProductCard key={prod.id} product={prod} className="!w-full" />
         ))}
-      </Carousel>
+      </div>
     </section>
   );
 }

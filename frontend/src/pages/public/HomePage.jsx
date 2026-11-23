@@ -24,11 +24,14 @@
  */
 
 import HeroBanners from '../../components/common/HeroBanners.jsx';
+import ExploreDiscountsSection from '../../components/common/ExploreDiscountsSection.jsx';
 import QuickActions from '../../components/common/QuickActions.jsx';
 import KhaltiPromoBanner from '../../components/common/KhaltiPromoBanner.jsx';
 import ShopByHealthConcern from '../../components/common/ShopByHealthConcern.jsx';
+import FeaturedOffersSection from '../../components/common/FeaturedOffersSection.jsx';
 import DealsManifestedBanner from '../../components/common/DealsManifestedBanner.jsx';
 import NewLaunches from '../../components/common/NewLaunches.jsx';
+import SpotlightProductFeature from '../../components/common/SpotlightProductFeature.jsx';
 import FreeDeliveryBanner from '../../components/common/FreeDeliveryBanner.jsx';
 import RentEquipmentSection from '../../components/common/RentEquipmentSection.jsx';
 import DealsOfTheDay from '../../components/common/DealsOfTheDay.jsx';
@@ -49,25 +52,34 @@ import TrustSection from '../../components/common/TrustSection.jsx';
 export default function HomePage() {
   return (
     <div className="space-y-4 sm:space-y-8 pb-14">
-      {/* 1. Hero Banners Carousel (2.5s auto-advance) */}
+      {/* 1. Hero Banners Carousel (2s auto-advance, infinite forward loop) */}
       <HeroBanners />
 
-      {/* 2. Core Service Quick Actions */}
+      {/* 2. Explore Up To 25% Discount on Selected Products (Top Discounts Bento Grid) */}
+      <ExploreDiscountsSection />
+
+      {/* 3. Core Service Quick Actions */}
       <QuickActions />
 
-      {/* 3. Official Khalti Payment Partner Promotion (Exact girl image + 10% Cashback) */}
+      {/* 4. Official Khalti Payment Partner Promotion (Exact girl image + 10% Cashback) */}
       <KhaltiPromoBanner />
 
-      {/* 4. Shop by Health Concern (7 large scrollable photographic cards) */}
+      {/* 5. Shop by Health Concern (6 official squircle category cards) */}
       <ShopByHealthConcern />
 
-      {/* 5. Deals You Manifested Are Here! Banner */}
+      {/* 6. Featured Offers (4 Cards: 30%, 25%, 20%, 15% OFF) */}
+      <FeaturedOffersSection />
+
+      {/* 7. Deals You Manifested Are Here! Banner */}
       <DealsManifestedBanner />
 
-      {/* 6. Trending Medicines Near You (PNG on white bg) */}
+      {/* 8. Trending Medicines Near You (2 Rows x 4 Columns Grid) */}
       <NewLaunches title="Trending Medicines Near You" />
 
-      {/* 7. Free Doorstep Delivery Banner (Scooter delivery artwork, warm yellow/red palette) */}
+      {/* 8. Best Seller Spotlight Product Feature (Left Image, Right Description) */}
+      <SpotlightProductFeature />
+
+      {/* 9. Free Doorstep Delivery Banner (Scooter delivery artwork, warm yellow/red palette) */}
       <FreeDeliveryBanner />
 
       {/* 8. Rent Medical Equipment Section (Brand Blue buttons) */}

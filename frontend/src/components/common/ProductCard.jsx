@@ -6,7 +6,7 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext.jsx';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, className = '' }) {
   const { addToCart } = useCart();
 
   const handleAdd = (e) => {
@@ -17,7 +17,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="w-[240px] sm:w-[260px] flex-shrink-0 bg-white border border-gray-100 rounded-3xl p-4 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative select-none">
+    <div className={`bg-white border border-gray-100 rounded-3xl p-4 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative select-none ${className || 'w-[240px] sm:w-[260px] flex-shrink-0'}`}>
       
       {/* Top badges: Discount & Rx badge */}
       <div className="flex items-center justify-between mb-2">
@@ -101,9 +101,12 @@ export default function ProductCard({ product }) {
           ) : (
             <button
               onClick={handleAdd}
-              className="px-3.5 py-1.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-black text-xs rounded-xl shadow-xs transition-transform active:scale-95"
+              className="px-3 py-1.5 bg-[var(--color-primary)] hover:bg-blue-700 text-white font-extrabold text-[11px] rounded-xl shadow-xs transition-all flex items-center gap-1 active:scale-95"
             >
-              + Add
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+              </svg>
+              <span>Add</span>
             </button>
           )}
         </div>

@@ -34,7 +34,7 @@
 [x] EPIC 3 — HERO SECTION, QUICK ACTIONS & PROMOTIONAL BANNERS
 ───────────────────────────────────────────────────────────
  [x] 3.1 Reusable Carousel component (mouse click & drag, arrows, dots, wheel hijack removed)
- [x] 3.2 HeroBanner section (4 realistic photographic banners, ~570x240, 3 visible on desktop + peek scroll)
+ [x] 3.2 HeroBanner section (Updated as per docx: Single full-width large highlighting banner ~500px tall in Y-axis, 4 HD banners, 2s auto-advance, continuous infinite forward loop without rewind, pill+dots pagination indicator)
  [x] 3.3 QuickActions grid (Order Medicines, Rent Equipment, Upload Rx, Nearby Pharmacies)
  [x] 3.4 Large Format Khalti Banner (~851x296 format with excited character photo and Nepali script copy)
  [x] 3.5 Large Format Promotional Banners (~851x296 format with realistic human characters between sections)
@@ -135,4 +135,40 @@
         - Restored original Globe SVG icon on the trigger button
         - Dropdown menu uses real colored flag emojis: 🇬🇧 English and 🇳🇵 नेपाली (without "GB" or "NP" abbreviations)
  [x] 10.4 Verified production build (✓ built in 661ms, 0 errors)
+
+[x] EPIC 11 — DISCOUNT BENTO SECTION & SPOTLIGHT PRODUCT FEATURE
+─────────────────────────────────────────────────────────────
+ [x] 11.1 Top Discounts Section (`ExploreDiscountsSection.jsx`):
+        - Heading: "Explore Up To 25% Discount on Selected Products"
+        - 3-card asymmetric Bento grid with exact reference pastel palette:
+          • Card 1 (Large left, sky blue #BAE6FD): "BloodFlow Plus" (Rs. 750) + product cluster
+          • Card 2 (Top right, warm yellow #FEF08A): "Hand Sanitizer" (Rs. 220) + product cluster
+          • Card 3 (Bottom right, soft pink #FBCFE8): "Body Lotion" (Rs. 290) + product cluster
+        - Positioned at top immediately after Hero Banner carousel
+ [x] 11.2 Middle Spotlight Product Feature (`SpotlightProductFeature.jsx`):
+        - Exact two-column layout: Left image of hand holding bottle, Right description & form
+        - "Best Seller" coral tag, "Extra Strength Pain Relief Tablets" heading
+        - 5-Star rating (4.8, 1,234 reviews) and 4 medical feature bullet points
+        - Interactive "Select Size:" dropdown (50, 100, 200 tablets) with dynamic pricing
+        - Golden amber pill "Add to Cart — Rs. 450" CTA with interactive feedback
+        - Omitted "Free delivery over..." line per user specification
+        - Positioned in middle of HomePage right next to Trending Medicines
+ [x] 11.3 Verified Vite production build (✓ built in 475ms, 0 errors)
+
+[x] EPIC 12 — FEATURED OFFERS, ILLUSTRATION CATEGORIES & TRENDING MEDICINES 2x4 GRID
+──────────────────────────────────────────────────────────────────────────────────
+ [x] 12.1 Featured Offers Section (`FeaturedOffersSection.jsx`):
+        - 4 promotional cards in a single row/grid with custom healthcare pastel tones
+        - Exact discount percentages: 30% OFF, 25% OFF, 20% OFF, 15% OFF
+        - Relevant categories: Supplements & Chronic Care, Skin Care & Derma, Baby & Mother Care, Personal Care & First Aid
+        - White pill "Shop Now" CTAs & transparent product cutouts
+ [x] 12.2 Shop by Health Concern Overhaul (`ShopByHealthConcern.jsx`):
+        - Integrated the 6 official user-provided illustration squircle cards:
+          • Diabetes, Stomach & Gut, Respiratory Care, Bone & Joints, Skin & Haircare, Women's Wellness
+        - "Direct put images no need for texts" — cards display the squircle illustrations directly with no redundant text below
+        - Preserved smooth horizontal scroller with navigation arrows
+ [x] 12.3 Trending Medicines Near You 2x4 Grid (`NewLaunches.jsx`):
+        - Converted from horizontal scroller to static 2 rows × 4 items grid (8 products total)
+        - Preserved Sanjeevani ProductCard design (Rx badges, pricing in Rs., Add to Cart / Upload Rx)
+ [x] 12.4 Verified Vite production build (✓ built in 557ms, 0 errors)
 ================================================================================
