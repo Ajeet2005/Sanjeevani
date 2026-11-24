@@ -40,6 +40,13 @@ export default function SpotlightProductFeature() {
       aria-label="Featured Product Spotlight"
     >
       <div className="bg-white rounded-3xl border border-gray-100 shadow-xs hover:shadow-md transition-shadow duration-300 p-6 sm:p-10">
+        {/* Small Ad badge on top-left beside main content body */}
+        <div className="flex items-center mb-3">
+          <span className="border border-gray-400 text-gray-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-white shadow-2xs">
+            Ad
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 items-center">
           {/* LEFT COLUMN: Product Image with Rounded Corners */}
           <div className="relative flex items-center justify-center">

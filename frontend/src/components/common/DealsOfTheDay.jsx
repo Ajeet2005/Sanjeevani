@@ -40,19 +40,19 @@ export default function DealsOfTheDay() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-label="Deals of the Day">
-      <div className="bg-gradient-to-r from-red-500 via-rose-500 to-pink-600 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-gradient-to-r from-[#0C2D7F] via-[var(--color-primary)] to-[#1548BE] rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
         
         {/* Header with Countdown Clock */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/20">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-black/20 text-yellow-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 bg-white/15 text-yellow-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 border border-white/10">
               <span>⚡</span>
               <span>LIMITED TIME FLASH DEALS</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold font-[var(--font-heading)]">
               Deals of the Day
             </h2>
-            <p className="text-xs sm:text-sm text-rose-100 mt-1">
+            <p className="text-xs sm:text-sm text-blue-100 mt-1">
               Save big on essential health monitors and daily wellness kits
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function DealsOfTheDay() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="bg-red-100 text-red-700 text-xs font-black px-2 py-0.5 rounded-md">
+                    <span className="bg-blue-50 text-[var(--color-primary)] border border-blue-200 text-xs font-black px-2 py-0.5 rounded-md">
                       {deal.discountPercent}% OFF
                     </span>
                     <span className="text-[11px] text-gray-400 font-medium">{deal.brand}</span>
@@ -116,11 +116,11 @@ export default function DealsOfTheDay() {
                   <div className="mt-3">
                     <div className="flex justify-between text-[10px] text-gray-500 font-medium mb-1">
                       <span>Claimed: {deal.soldPercent}%</span>
-                      <span className="text-red-600 font-bold">Few Left</span>
+                      <span className="text-amber-600 font-bold">Few Left</span>
                     </div>
                     <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-red-500 rounded-full"
+                        className="h-full bg-[var(--color-primary)] rounded-full"
                         style={{ width: `${deal.soldPercent}%` }}
                       />
                     </div>
@@ -139,7 +139,7 @@ export default function DealsOfTheDay() {
 
                   <button
                     onClick={() => addToCart({ id: deal.id, name: deal.name, price: deal.dealPrice })}
-                    className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+                    className="px-3 py-1.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
                   >
                     Add
                   </button>
