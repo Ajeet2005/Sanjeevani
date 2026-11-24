@@ -315,42 +315,6 @@ export default function NutritionSupplementsPage() {
             })}
           </div>
         </div>
-
-        {/* Popular Price Brackets */}
-        <div className="space-y-1 mt-3 pt-2.5 border-t border-slate-100">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-            Popular Brackets
-          </span>
-          {NUTRITION_PRICE_RANGES.map((range) => {
-            const isChecked = selectedPriceRanges.includes(range.id);
-            return (
-              <div
-                key={range.id}
-                onClick={() => togglePriceRange(range.id)}
-                className={`flex items-center gap-2.5 py-1.5 px-1.5 rounded-lg cursor-pointer transition-colors select-none group ${
-                  isChecked ? 'bg-blue-50/60 font-semibold' : 'hover:bg-slate-50'
-                }`}
-              >
-                <div
-                  className={`w-[18px] h-[18px] rounded-[5px] border-[1.5px] flex items-center justify-center transition-all flex-shrink-0 ${
-                    isChecked
-                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-xs'
-                      : 'border-slate-300 bg-white group-hover:border-[var(--color-primary)]'
-                  }`}
-                >
-                  {isChecked && (
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  )}
-                </div>
-                <span className="text-[12.5px] text-slate-700 group-hover:text-[var(--color-primary)] transition-colors">
-                  {range.label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
       </div>
 
       {/* 3. CATEGORY Block with Checkboxes and Right-Aligned Counts */}

@@ -32,6 +32,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/medicines" element={<MedicinesPage />} />
             <Route path="/nutrition" element={<NutritionSupplementsPage />} />
+            <Route path="/health-devices" element={<MedicinesPage />} />
+            <Route path="/healthcare" element={<MedicinesPage />} />
+            <Route path="/offers" element={<MedicinesPage />} />
             <Route path="/equipment" element={<EquipmentPage />} />
             <Route path="/vendors" element={<VendorsPage />} />
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
