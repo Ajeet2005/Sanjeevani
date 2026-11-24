@@ -14,6 +14,7 @@ import {
   NUTRITION_PRODUCTS,
   NUTRITION_SUBCATEGORIES,
   NUTRITION_PRICE_RANGES,
+  PRICE_CHECKPOINTS,
   NUTRITION_TAGS,
 } from '../../data/nutritionProducts.js';
 
@@ -23,6 +24,7 @@ export default function NutritionSupplementsPage() {
   // ─── Filter States ───
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
+  const [priceCheckpointIndex, setPriceCheckpointIndex] = useState(4); // default 5000 (shows up to Rs 5000)
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [brandSearchQuery, setBrandSearchQuery] = useState('');
   const [showAllBrands, setShowAllBrands] = useState(false);
@@ -145,6 +147,7 @@ export default function NutritionSupplementsPage() {
   const resetFilters = () => {
     setSelectedCategory('all');
     setSelectedPriceRanges([]);
+    setPriceCheckpointIndex(4); // Reset to 5000 (show all)
     setSelectedBrands([]);
     setBrandSearchQuery('');
     setSelectedTag(null);
@@ -154,6 +157,7 @@ export default function NutritionSupplementsPage() {
   const hasActiveFilters =
     selectedCategory !== 'all' ||
     selectedPriceRanges.length > 0 ||
+    priceCheckpointIndex !== 4 ||
     selectedBrands.length > 0 ||
     selectedTag !== null ||
     brandSearchQuery !== '';
@@ -167,7 +171,13 @@ export default function NutritionSupplementsPage() {
       list = list.filter((p) => p.category === selectedCategory);
     }
 
-    // Filter by Price Ranges
+    // Filter by Price Slider Checkpoint (0 -> 500 -> 1000 -> 2000 -> 5000)
+    if (priceCheckpointIndex < 4) {
+      const maxAllowedPrice = PRICE_CHECKPOINTS[priceCheckpointIndex].value;
+      list = list.filter((p) => p.price <= maxAllowedPrice);
+    }
+
+    // Filter by Price Ranges Checkboxes
     if (selectedPriceRanges.length > 0) {
       list = list.filter((p) =>
         selectedPriceRanges.some((rangeId) => {
@@ -200,7 +210,7 @@ export default function NutritionSupplementsPage() {
     }
 
     return list;
-  }, [selectedCategory, selectedPriceRanges, selectedBrands, selectedTag, sortBy]);
+  }, [selectedCategory, selectedPriceRanges, priceCheckpointIndex, selectedBrands, selectedTag, sortBy]);
 
   // ─── ePharmacy Style Filter Card Content ───
   const FilterContent = (
@@ -236,12 +246,81 @@ export default function NutritionSupplementsPage() {
         </button>
       </div>
 
-      {/* 2. PRICE Block */}
-      <div className="border-t border-slate-100 pt-3.5 pb-2 first-of-type:border-t-0 first-of-type:pt-2.5">
-        <h5 className="text-[11.5px] font-black uppercase tracking-[0.12em] text-slate-400 mb-2.5">
-          Price
-        </h5>
-        <div className="space-y-1">
+      {/* 2. PRICE Block: Checkpoint Slider (0 -> 500 -> 1000 -> 2000 -> 5000) */}
+      <div className="border-t border-slate-100 pt-3.5 pb-2.5 first-of-type:border-t-0 first-of-type:pt-2.5">
+        <div className="flex items-center justify-between mb-2">
+          <h5 className="text-[11.5px] font-black uppercase tracking-[0.12em] text-slate-400">
+            Price
+          </h5>
+          <span className="text-[11px] font-extrabold text-[var(--color-primary)] bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">
+            {priceCheckpointIndex === 4
+              ? 'All (Up to Rs 5,000)'
+              : `Up to Rs ${PRICE_CHECKPOINTS[priceCheckpointIndex].value.toLocaleString()}`}
+          </span>
+        </div>
+
+        {/* Checkpoint Slider with custom styling */}
+        <div className="pt-2 pb-1 px-1">
+          <div className="relative flex items-center">
+            <input
+              type="range"
+              min={0}
+              max={4}
+              step={1}
+              value={priceCheckpointIndex}
+              onChange={(e) => setPriceCheckpointIndex(Number(e.target.value))}
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[var(--color-primary)] z-10 relative bg-transparent"
+              style={{
+                background: `linear-gradient(to right, var(--color-primary) ${(priceCheckpointIndex / 4) * 100}%, #e2e8f0 ${(priceCheckpointIndex / 4) * 100}%)`,
+              }}
+              aria-label="Price range checkpoint slider"
+            />
+          </div>
+
+          {/* Checkpoint ticks and numeric labels (0, 500, 1000, 2000, 5000) */}
+          <div className="flex justify-between items-center mt-2 px-0.5 select-none">
+            {PRICE_CHECKPOINTS.map((cp) => {
+              const isPassed = cp.index <= priceCheckpointIndex;
+              const isCurrent = cp.index === priceCheckpointIndex;
+              return (
+                <button
+                  key={cp.index}
+                  type="button"
+                  onClick={() => setPriceCheckpointIndex(cp.index)}
+                  className="flex flex-col items-center group cursor-pointer focus:outline-none"
+                  title={`Set price limit to Rs ${cp.value}`}
+                >
+                  <span
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      isCurrent
+                        ? 'bg-[var(--color-primary)] scale-125 ring-2 ring-blue-200'
+                        : isPassed
+                        ? 'bg-[var(--color-primary)]'
+                        : 'bg-slate-300 group-hover:bg-slate-400'
+                    }`}
+                  />
+                  <span
+                    className={`text-[10px] mt-1 transition-colors ${
+                      isCurrent
+                        ? 'font-extrabold text-[var(--color-primary)]'
+                        : isPassed
+                        ? 'font-semibold text-slate-700'
+                        : 'text-slate-400 group-hover:text-slate-600'
+                    }`}
+                  >
+                    {cp.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Popular Price Brackets */}
+        <div className="space-y-1 mt-3 pt-2.5 border-t border-slate-100">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+            Popular Brackets
+          </span>
           {NUTRITION_PRICE_RANGES.map((range) => {
             const isChecked = selectedPriceRanges.includes(range.id);
             return (
@@ -265,7 +344,7 @@ export default function NutritionSupplementsPage() {
                     </svg>
                   )}
                 </div>
-                <span className="text-[13px] text-slate-700 group-hover:text-[var(--color-primary)] transition-colors">
+                <span className="text-[12.5px] text-slate-700 group-hover:text-[var(--color-primary)] transition-colors">
                   {range.label}
                 </span>
               </div>

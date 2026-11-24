@@ -16,6 +16,14 @@ export const NUTRITION_SUBCATEGORIES = [
   { id: 'joints', label: 'Bone & Joint Care' },
 ];
 
+export const PRICE_CHECKPOINTS = [
+  { index: 0, value: 0, label: '0' },
+  { index: 1, value: 500, label: '500' },
+  { index: 2, value: 1000, label: '1000' },
+  { index: 3, value: 2000, label: '2000' },
+  { index: 4, value: 5000, label: '5000' },
+];
+
 export const NUTRITION_PRICE_RANGES = [
   { id: 'under-500', label: 'Under Rs 500.00', min: 0, max: 500 },
   { id: '500-1500', label: 'Rs 500.00 - Rs 1500.00', min: 500, max: 1500 },
