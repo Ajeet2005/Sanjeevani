@@ -33,8 +33,10 @@ export default function MedicinesPage() {
     return initialCategoryParam;
   }, [initialCategoryParam]);
 
-  // ─── Filter States ───
-  const [selectedCategory, setSelectedCategory] = useState(normalizedInitialCategory);
+  // ─── Filter States (Multiple category & brand selection supported) ───
+  const [selectedCategories, setSelectedCategories] = useState(
+    normalizedInitialCategory !== 'all' ? [normalizedInitialCategory] : []
+  );
   const [priceCheckpointIndex, setPriceCheckpointIndex] = useState(4); // default 5000 (shows up to Rs 5000)
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [brandSearchQuery, setBrandSearchQuery] = useState('');
@@ -51,7 +53,7 @@ export default function MedicinesPage() {
   // Sync state if URL query param changes
   useEffect(() => {
     if (normalizedInitialCategory && normalizedInitialCategory !== 'all') {
-      setSelectedCategory(normalizedInitialCategory);
+      setSelectedCategories([normalizedInitialCategory]);
     }
   }, [normalizedInitialCategory]);
 
@@ -90,6 +92,19 @@ export default function MedicinesPage() {
     }, 2500);
   };
 
+  // Category toggle (supports multiple selection)
+  const toggleCategory = (catId) => {
+    if (catId === 'all') {
+      setSelectedCategories([]);
+      return;
+    }
+    setSelectedCategories((prev) =>
+      prev.includes(catId)
+        ? prev.filter((id) => id !== catId)
+        : [...prev, catId]
+    );
+  };
+
   // Filtered brands based on search input
   const visibleBrands = useMemo(() => {
     let list = MEDICINE_BRANDS;
@@ -104,7 +119,7 @@ export default function MedicinesPage() {
     return list;
   }, [brandSearchQuery, showAllBrands]);
 
-  // Brand toggle
+  // Brand toggle (supports multiple selection)
   const toggleBrand = (brandName) => {
     setSelectedBrands((prev) =>
       prev.includes(brandName)
@@ -120,7 +135,7 @@ export default function MedicinesPage() {
 
   // Reset all filters
   const resetFilters = () => {
-    setSelectedCategory('all');
+    setSelectedCategories([]);
     setPriceCheckpointIndex(4); // Reset to Rs 5000 (show all)
     setSelectedBrands([]);
     setBrandSearchQuery('');
@@ -129,7 +144,7 @@ export default function MedicinesPage() {
   };
 
   const hasActiveFilters =
-    selectedCategory !== 'all' ||
+    selectedCategories.length > 0 ||
     priceCheckpointIndex !== 4 ||
     selectedBrands.length > 0 ||
     selectedTag !== null ||
@@ -139,9 +154,9 @@ export default function MedicinesPage() {
   const filteredMedicines = useMemo(() => {
     let list = [...MEDICINES];
 
-    // Filter by Subcategory
-    if (selectedCategory !== 'all') {
-      list = list.filter((p) => p.category === selectedCategory);
+    // Filter by Subcategories (Multiple selection support)
+    if (selectedCategories.length > 0) {
+      list = list.filter((p) => selectedCategories.includes(p.category));
     }
 
     // Filter by Price Slider Checkpoint (0 -> 500 -> 1000 -> 2000 -> 5000)
@@ -150,7 +165,7 @@ export default function MedicinesPage() {
       list = list.filter((p) => p.price <= maxAllowedPrice);
     }
 
-    // Filter by Brands
+    // Filter by Brands (Multiple selection support)
     if (selectedBrands.length > 0) {
       list = list.filter((p) => selectedBrands.includes(p.brand));
     }
@@ -172,7 +187,7 @@ export default function MedicinesPage() {
     }
 
     return list;
-  }, [selectedCategory, priceCheckpointIndex, selectedBrands, selectedTag, sortBy]);
+  }, [selectedCategories, priceCheckpointIndex, selectedBrands, selectedTag, sortBy]);
 
   // ─── ePharmacy Style Filter Card Content ───
   const FilterContent = (
@@ -286,11 +301,11 @@ export default function MedicinesPage() {
         </h5>
         <div className="space-y-1">
           {MEDICINE_CATEGORIES.filter((c) => c.id !== 'all').map((cat) => {
-            const isChecked = selectedCategory === cat.id;
+            const isChecked = selectedCategories.includes(cat.id);
             return (
               <div
                 key={cat.id}
-                onClick={() => setSelectedCategory(isChecked ? 'all' : cat.id)}
+                onClick={() => toggleCategory(cat.id)}
                 className={`flex items-center gap-2.5 py-1.5 px-1.5 rounded-lg cursor-pointer transition-colors select-none group ${
                   isChecked ? 'bg-blue-50/60 font-semibold' : 'hover:bg-slate-50'
                 }`}
@@ -517,12 +532,15 @@ export default function MedicinesPage() {
           {/* Horizontal Subcategory Pill Bar (Health Concern categories from Image 1) */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             {MEDICINE_CATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat.id;
+              const isSelected =
+                cat.id === 'all'
+                  ? selectedCategories.length === 0
+                  : selectedCategories.includes(cat.id);
               return (
                 <button
                   key={cat.id}
                   type="button"
-                  onClick={() => setSelectedCategory(cat.id)}
+                  onClick={() => toggleCategory(cat.id)}
                   className={`px-4 py-2 rounded-full text-xs whitespace-nowrap transition-all duration-200 cursor-pointer select-none ${
                     isSelected
                       ? 'bg-[var(--color-primary)] text-white font-bold shadow-xs'

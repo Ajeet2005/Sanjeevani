@@ -21,8 +21,8 @@ import {
 export default function NutritionSupplementsPage() {
   const { addToCart } = useCart();
 
-  // ─── Filter States ───
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  // ─── Filter States (Multiple category & brand selection supported) ───
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
   const [priceCheckpointIndex, setPriceCheckpointIndex] = useState(4); // default 5000 (shows up to Rs 5000)
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -120,6 +120,19 @@ export default function NutritionSupplementsPage() {
     return list;
   }, [allBrandsWithCounts, brandSearchQuery, showAllBrands]);
 
+  // Category toggle (supports multiple selection)
+  const toggleCategory = (catId) => {
+    if (catId === 'all') {
+      setSelectedCategories([]);
+      return;
+    }
+    setSelectedCategories((prev) =>
+      prev.includes(catId)
+        ? prev.filter((id) => id !== catId)
+        : [...prev, catId]
+    );
+  };
+
   // Price range toggle
   const togglePriceRange = (rangeId) => {
     setSelectedPriceRanges((prev) =>
@@ -129,7 +142,7 @@ export default function NutritionSupplementsPage() {
     );
   };
 
-  // Brand toggle
+  // Brand toggle (supports multiple selection)
   const toggleBrand = (brandName) => {
     setSelectedBrands((prev) =>
       prev.includes(brandName)
@@ -145,7 +158,7 @@ export default function NutritionSupplementsPage() {
 
   // Reset all filters
   const resetFilters = () => {
-    setSelectedCategory('all');
+    setSelectedCategories([]);
     setSelectedPriceRanges([]);
     setPriceCheckpointIndex(4); // Reset to 5000 (show all)
     setSelectedBrands([]);
@@ -155,7 +168,7 @@ export default function NutritionSupplementsPage() {
   };
 
   const hasActiveFilters =
-    selectedCategory !== 'all' ||
+    selectedCategories.length > 0 ||
     selectedPriceRanges.length > 0 ||
     priceCheckpointIndex !== 4 ||
     selectedBrands.length > 0 ||
@@ -166,9 +179,9 @@ export default function NutritionSupplementsPage() {
   const filteredProducts = useMemo(() => {
     let list = [...NUTRITION_PRODUCTS];
 
-    // Filter by Subcategory
-    if (selectedCategory !== 'all') {
-      list = list.filter((p) => p.category === selectedCategory);
+    // Filter by Subcategories (Multiple selection support)
+    if (selectedCategories.length > 0) {
+      list = list.filter((p) => selectedCategories.includes(p.category));
     }
 
     // Filter by Price Slider Checkpoint (0 -> 500 -> 1000 -> 2000 -> 5000)
@@ -210,7 +223,7 @@ export default function NutritionSupplementsPage() {
     }
 
     return list;
-  }, [selectedCategory, selectedPriceRanges, priceCheckpointIndex, selectedBrands, selectedTag, sortBy]);
+  }, [selectedCategories, selectedPriceRanges, priceCheckpointIndex, selectedBrands, selectedTag, sortBy]);
 
   // ─── ePharmacy Style Filter Card Content ───
   const FilterContent = (
@@ -324,11 +337,11 @@ export default function NutritionSupplementsPage() {
         </h5>
         <div className="space-y-1">
           {categoriesWithCounts.map((cat) => {
-            const isChecked = selectedCategory === cat.id;
+            const isChecked = selectedCategories.includes(cat.id);
             return (
               <div
                 key={cat.id}
-                onClick={() => setSelectedCategory(isChecked ? 'all' : cat.id)}
+                onClick={() => toggleCategory(cat.id)}
                 className={`flex items-center gap-2.5 py-1.5 px-1.5 rounded-lg cursor-pointer transition-colors select-none group ${
                   isChecked ? 'bg-blue-50/60 font-semibold' : 'hover:bg-slate-50'
                 }`}
@@ -555,12 +568,15 @@ export default function NutritionSupplementsPage() {
           {/* Horizontal Subcategory Pill Bar (from reference UI) */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             {NUTRITION_SUBCATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat.id;
+              const isSelected =
+                cat.id === 'all'
+                  ? selectedCategories.length === 0
+                  : selectedCategories.includes(cat.id);
               return (
                 <button
                   key={cat.id}
                   type="button"
-                  onClick={() => setSelectedCategory(cat.id)}
+                  onClick={() => toggleCategory(cat.id)}
                   className={`px-4 py-2 rounded-full text-xs whitespace-nowrap transition-all duration-200 cursor-pointer select-none ${
                     isSelected
                       ? 'bg-[var(--color-primary)] text-white font-bold shadow-xs'
