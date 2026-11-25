@@ -1,179 +1,129 @@
 /*
- * SanjeevaniLogo.jsx — Full brand logo (crossed bandages, wordmark, stethoscope swoosh & tagline)
+ * SanjeevaniLogo.jsx — Full brand logo (asymmetrical crossed bandages, wordmark, stethoscope swoosh & tagline)
  * Rendered in Sanjeevani's primary healthcare blue (#1A56DB) with transparent background.
  */
 
-export default function SanjeevaniLogo({ className = 'h-11 sm:h-12 w-auto' }) {
+function BandageBody() {
+  return (
+    <>
+      {/* Outer capsule border */}
+      <rect
+        x="-19"
+        y="-52"
+        width="38"
+        height="104"
+        rx="19"
+        stroke="currentColor"
+        strokeWidth="4.4"
+      />
+      {/* Center gauze pad */}
+      <rect x="-11" y="-16" width="22" height="32" rx="3" fill="currentColor" />
+      {/* Top perforation dots (3-4-3 grid) */}
+      <circle cx="-6" cy="-39" r="1.9" fill="currentColor" />
+      <circle cx="0" cy="-42" r="1.9" fill="currentColor" />
+      <circle cx="6" cy="-39" r="1.9" fill="currentColor" />
+      <circle cx="-8.5" cy="-32" r="1.9" fill="currentColor" />
+      <circle cx="-2.8" cy="-32" r="1.9" fill="currentColor" />
+      <circle cx="2.8" cy="-32" r="1.9" fill="currentColor" />
+      <circle cx="8.5" cy="-32" r="1.9" fill="currentColor" />
+      <circle cx="-6" cy="-25" r="1.9" fill="currentColor" />
+      <circle cx="0" cy="-25" r="1.9" fill="currentColor" />
+      <circle cx="6" cy="-25" r="1.9" fill="currentColor" />
+      {/* Bottom perforation dots (3-4-3 grid) */}
+      <circle cx="-6" cy="25" r="1.9" fill="currentColor" />
+      <circle cx="0" cy="25" r="1.9" fill="currentColor" />
+      <circle cx="6" cy="25" r="1.9" fill="currentColor" />
+      <circle cx="-8.5" cy="32" r="1.9" fill="currentColor" />
+      <circle cx="-2.8" cy="32" r="1.9" fill="currentColor" />
+      <circle cx="2.8" cy="32" r="1.9" fill="currentColor" />
+      <circle cx="8.5" cy="32" r="1.9" fill="currentColor" />
+      <circle cx="-6" cy="39" r="1.9" fill="currentColor" />
+      <circle cx="0" cy="42" r="1.9" fill="currentColor" />
+      <circle cx="6" cy="39" r="1.9" fill="currentColor" />
+    </>
+  );
+}
+
+export default function SanjeevaniLogo({ className = 'h-12 sm:h-14 w-auto' }) {
   return (
     <svg
-      viewBox="0 0 430 135"
+      viewBox="0 0 385 112"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`text-[var(--color-primary)] ${className}`}
       role="img"
-      aria-label="Sanjeevani — Medicines, Equipment & Care"
+      aria-label="Sanjeevani — Medicine and Equipments"
     >
       <defs>
-        {/* Mask so the front bandage cleanly overlaps the back bandage on any background */}
+        {/* Mask so the front bandage cleanly overlaps the shifted back bandage on any background */}
         <mask id="sanjeevani-back-bandage-mask">
-          <rect width="430" height="135" fill="white" />
-          <g transform="translate(68 68) rotate(-42)">
-            <rect x="-23" y="-62" width="46" height="124" rx="23" fill="black" />
+          <rect width="385" height="112" fill="white" />
+          <g transform="translate(55 58) rotate(-44)">
+            <rect x="-23" y="-56" width="46" height="112" rx="23" fill="black" />
           </g>
         </mask>
       </defs>
 
-      {/* ─── Back Bandage (bottom-left to top-right) ─── */}
+      {/* ─── Back Bandage (shifted up-right so both bandages remain clearly distinct) ─── */}
       <g mask="url(#sanjeevani-back-bandage-mask)">
-        <g transform="translate(72 66) rotate(44)">
-          {/* Outer capsule border */}
-          <rect
-            x="-20"
-            y="-58"
-            width="40"
-            height="116"
-            rx="20"
-            stroke="currentColor"
-            strokeWidth="3.2"
-          />
-          <rect
-            x="-16"
-            y="-54"
-            width="32"
-            height="108"
-            rx="16"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            opacity="0.7"
-          />
-          {/* Center pad */}
-          <rect x="-11" y="-17" width="22" height="34" rx="2.5" fill="currentColor" />
-          {/* Top perforation dots */}
-          <circle cx="-6" cy="-42" r="1.7" fill="currentColor" />
-          <circle cx="0" cy="-45" r="1.7" fill="currentColor" />
-          <circle cx="6" cy="-42" r="1.7" fill="currentColor" />
-          <circle cx="-8" cy="-35" r="1.7" fill="currentColor" />
-          <circle cx="-2.5" cy="-35" r="1.7" fill="currentColor" />
-          <circle cx="2.5" cy="-35" r="1.7" fill="currentColor" />
-          <circle cx="8" cy="-35" r="1.7" fill="currentColor" />
-          <circle cx="-6" cy="-28" r="1.7" fill="currentColor" />
-          <circle cx="0" cy="-28" r="1.7" fill="currentColor" />
-          <circle cx="6" cy="-28" r="1.7" fill="currentColor" />
-          {/* Bottom perforation dots */}
-          <circle cx="-6" cy="28" r="1.7" fill="currentColor" />
-          <circle cx="0" cy="28" r="1.7" fill="currentColor" />
-          <circle cx="6" cy="28" r="1.7" fill="currentColor" />
-          <circle cx="-8" cy="35" r="1.7" fill="currentColor" />
-          <circle cx="-2.5" cy="35" r="1.7" fill="currentColor" />
-          <circle cx="2.5" cy="35" r="1.7" fill="currentColor" />
-          <circle cx="8" cy="35" r="1.7" fill="currentColor" />
-          <circle cx="-6" cy="42" r="1.7" fill="currentColor" />
-          <circle cx="0" cy="45" r="1.7" fill="currentColor" />
-          <circle cx="6" cy="42" r="1.7" fill="currentColor" />
+        <g transform="translate(76 47) rotate(45)">
+          <BandageBody />
         </g>
       </g>
 
       {/* ─── Front Bandage (top-left to bottom-right) ─── */}
-      <g transform="translate(68 68) rotate(-42)">
-        {/* Subtle bottom-left accent curve */}
+      <g transform="translate(55 58) rotate(-44)">
+        {/* Tapered crescent accent along the bottom-left edge */}
         <path
-          d="M -25 2 C -26 16, -24 28, -19 37"
-          stroke="currentColor"
-          strokeWidth="3.2"
-          strokeLinecap="round"
+          d="M -26 4 C -27 19, -24 31, -14 40 C -21 29, -23 18, -26 4 Z"
+          fill="currentColor"
         />
-        {/* Outer capsule border */}
-        <rect
-          x="-20"
-          y="-58"
-          width="40"
-          height="116"
-          rx="20"
-          stroke="currentColor"
-          strokeWidth="3.2"
-        />
-        <rect
-          x="-16"
-          y="-54"
-          width="32"
-          height="108"
-          rx="16"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          opacity="0.7"
-        />
-        {/* Center pad */}
-        <rect x="-11" y="-17" width="22" height="34" rx="2.5" fill="currentColor" />
-        {/* Top perforation dots */}
-        <circle cx="-6" cy="-42" r="1.7" fill="currentColor" />
-        <circle cx="0" cy="-45" r="1.7" fill="currentColor" />
-        <circle cx="6" cy="-42" r="1.7" fill="currentColor" />
-        <circle cx="-8" cy="-35" r="1.7" fill="currentColor" />
-        <circle cx="-2.5" cy="-35" r="1.7" fill="currentColor" />
-        <circle cx="2.5" cy="-35" r="1.7" fill="currentColor" />
-        <circle cx="8" cy="-35" r="1.7" fill="currentColor" />
-        <circle cx="-6" cy="-28" r="1.7" fill="currentColor" />
-        <circle cx="0" cy="-28" r="1.7" fill="currentColor" />
-        <circle cx="6" cy="-28" r="1.7" fill="currentColor" />
-        {/* Bottom perforation dots */}
-        <circle cx="-6" cy="28" r="1.7" fill="currentColor" />
-        <circle cx="0" cy="28" r="1.7" fill="currentColor" />
-        <circle cx="6" cy="28" r="1.7" fill="currentColor" />
-        <circle cx="-8" cy="35" r="1.7" fill="currentColor" />
-        <circle cx="-2.5" cy="35" r="1.7" fill="currentColor" />
-        <circle cx="2.5" cy="35" r="1.7" fill="currentColor" />
-        <circle cx="8" cy="35" r="1.7" fill="currentColor" />
-        <circle cx="-6" cy="42" r="1.7" fill="currentColor" />
-        <circle cx="0" cy="45" r="1.7" fill="currentColor" />
-        <circle cx="6" cy="42" r="1.7" fill="currentColor" />
+        <BandageBody />
       </g>
 
       {/* ─── Wordmark: "Sanjeevani" ─── */}
       <text
-        x="148"
-        y="76"
+        x="126"
+        y="62"
         fill="currentColor"
         fontFamily="'Plus Jakarta Sans', 'Nunito', 'Arial Rounded MT Bold', sans-serif"
         fontWeight="900"
-        fontSize="45"
+        fontSize="44"
         letterSpacing="-0.5"
       >
         Sanjeevani
       </text>
 
       {/* ─── Stethoscope & Curved Tube Underline ─── */}
-      {/* Left & Right Earpiece Tips */}
-      <circle cx="395" cy="33" r="3" fill="currentColor" />
-      <circle cx="408" cy="33" r="3" fill="currentColor" />
-      {/* Binaural U-tube */}
+      <circle cx="357" cy="22" r="2.8" fill="currentColor" />
+      <circle cx="369" cy="22" r="2.8" fill="currentColor" />
       <path
-        d="M 395 33 C 386 35, 386 64, 401.5 64 C 417 64, 417 35, 408 33"
+        d="M 357 22 C 349 24, 349 51, 363 51 C 377 51, 377 24, 369 22"
         stroke="currentColor"
-        strokeWidth="3.6"
+        strokeWidth="3.5"
         strokeLinecap="round"
         fill="none"
       />
-      {/* Stethoscope stem flowing into swooshing underline beneath "Sanjeevani" */}
       <path
-        d="M 401.5 64 C 401.5 92, 374 96, 338 92 C 280 86, 200 88, 146 98"
+        d="M 363 51 C 363 77, 337 81, 303 77 C 248 71, 175 73, 125 83"
         stroke="currentColor"
-        strokeWidth="3.6"
+        strokeWidth="3.5"
         strokeLinecap="round"
         fill="none"
       />
 
-      {/* ─── Tagline: "Medicines, Equipment & Care" ─── */}
+      {/* ─── Tagline: "Medicine and Equipments" ─── */}
       <text
-        x="151"
-        y="120"
+        x="132"
+        y="103"
         fill="currentColor"
         fontFamily="'Plus Jakarta Sans', 'Inter', sans-serif"
         fontWeight="700"
         fontStyle="italic"
-        fontSize="16.5"
-        letterSpacing="0.2"
+        fontSize="16"
+        letterSpacing="0.15"
       >
-        Medicines, Equipment &amp; Care
+        Medicine and Equipments
       </text>
     </svg>
   );

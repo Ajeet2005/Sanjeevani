@@ -13,6 +13,35 @@ import SearchBar from '../common/SearchBar.jsx';
 import LocationSelector from '../common/LocationSelector.jsx';
 import SanjeevaniLogo from '../common/SanjeevaniLogo.jsx';
 
+function LanguageFlag({ lang }) {
+  if (lang === 'ने') {
+    return (
+      <span className="w-5 h-4 flex items-center justify-center flex-shrink-0 inline-flex" aria-hidden="true">
+        <svg className="w-3.5 h-4 drop-shadow-xs" viewBox="0 0 24 30">
+          <polygon points="0,0 21,13 8,13 23,29 0,29" fill="#003893" />
+          <polygon points="2,2.5 18,12 6.5,12 19.5,27 2,27" fill="#DC143C" />
+          <path d="M4.5 7.2a2.5 2.5 0 0 0 4 0 2 2 0 0 1-3.5 0z" fill="#FFFFFF" />
+          <circle cx="6.5" cy="8" r="0.7" fill="#FFFFFF" />
+          <circle cx="7.5" cy="19.5" r="2.5" fill="#FFFFFF" />
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <span className="w-5 h-3.5 rounded-[2px] overflow-hidden shadow-xs border border-gray-200 flex-shrink-0 inline-flex" aria-hidden="true">
+      <svg className="w-full h-full" viewBox="0 0 60 36">
+        <rect width="60" height="36" fill="#012169" />
+        <path d="M0 0 L60 36 M60 0 L0 36" stroke="#FFFFFF" strokeWidth="6" />
+        <path d="M0 0 L30 18 M60 36 L30 18" stroke="#C8102E" strokeWidth="2" />
+        <path d="M60 0 L30 18 M0 36 L30 18" stroke="#C8102E" strokeWidth="2" />
+        <path d="M30 0 v36 M0 18 h60" stroke="#FFFFFF" strokeWidth="10" />
+        <path d="M30 0 v36 M0 18 h60" stroke="#C8102E" strokeWidth="6" />
+      </svg>
+    </span>
+  );
+}
+
 export default function Navbar() {
   const { cartCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -104,7 +133,7 @@ export default function Navbar() {
   return (
     <header className="bg-white shadow-xs sticky top-0 z-40 border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <div className="flex items-center justify-between h-16 gap-4">
+        <div className="flex items-center justify-between h-[72px] sm:h-20 gap-4">
 
           {/* ─── Logo ─── */}
           <Link
@@ -112,7 +141,7 @@ export default function Navbar() {
             className="flex-shrink-0 flex items-center group py-1"
             aria-label="Sanjeevani — Home"
           >
-            <SanjeevaniLogo className="h-11 sm:h-12 w-auto transition-transform duration-200 group-hover:scale-[1.03]" />
+            <SanjeevaniLogo className="h-12 sm:h-14 w-auto transition-transform duration-200 group-hover:scale-[1.03]" />
           </Link>
 
           {/* ─── Location Selector (hidden on small mobile) ─── */}
@@ -180,19 +209,15 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Language Dropdown with Globe Icon & Real Flag Emojis */}
+            {/* Language Dropdown with Active Flag Icon */}
             <div className="relative hidden sm:block" ref={langRef}>
               <button
                 onClick={() => setLangOpen(!langOpen)}
                 className="p-2 rounded-xl hover:bg-gray-50 transition-colors duration-200 flex items-center gap-1.5 text-gray-700"
                 aria-expanded={langOpen}
-                aria-label="Select language"
+                aria-label={`Select language (current: ${currentLang === 'ने' ? 'Nepali' : 'English'})`}
               >
-                {/* Globe Icon */}
-                <svg className="w-5 h-5 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                </svg>
-                <span className="text-xs font-bold text-gray-700">{currentLang}</span>
+                <LanguageFlag lang={currentLang} />
                 <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -206,17 +231,7 @@ export default function Navbar() {
                       currentLang === 'EN' ? 'text-[var(--color-primary)] bg-blue-50' : 'text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    {/* Real UK Flag */}
-                    <span className="w-5 h-3.5 rounded-[2px] overflow-hidden shadow-xs border border-gray-200 flex-shrink-0 inline-flex">
-                      <svg className="w-full h-full" viewBox="0 0 60 36">
-                        <rect width="60" height="36" fill="#012169" />
-                        <path d="M0 0 L60 36 M60 0 L0 36" stroke="#FFFFFF" strokeWidth="6" />
-                        <path d="M0 0 L30 18 M60 36 L30 18" stroke="#C8102E" strokeWidth="2" />
-                        <path d="M60 0 L30 18 M0 36 L30 18" stroke="#C8102E" strokeWidth="2" />
-                        <path d="M30 0 v36 M0 18 h60" stroke="#FFFFFF" strokeWidth="10" />
-                        <path d="M30 0 v36 M0 18 h60" stroke="#C8102E" strokeWidth="6" />
-                      </svg>
-                    </span>
+                    <LanguageFlag lang="EN" />
                     <span>English</span>
                   </button>
                   <button
@@ -225,16 +240,7 @@ export default function Navbar() {
                       currentLang === 'ने' ? 'text-[var(--color-primary)] bg-blue-50' : 'text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    {/* Real Nepal Flag */}
-                    <span className="w-5 h-4 flex items-center justify-center flex-shrink-0 inline-flex">
-                      <svg className="w-3.5 h-4 drop-shadow-xs" viewBox="0 0 24 30">
-                        <polygon points="0,0 21,13 8,13 23,29 0,29" fill="#003893" />
-                        <polygon points="2,2.5 18,12 6.5,12 19.5,27 2,27" fill="#DC143C" />
-                        <path d="M4.5 7.2a2.5 2.5 0 0 0 4 0 2 2 0 0 1-3.5 0z" fill="#FFFFFF" />
-                        <circle cx="6.5" cy="8" r="0.7" fill="#FFFFFF" />
-                        <circle cx="7.5" cy="19.5" r="2.5" fill="#FFFFFF" />
-                      </svg>
-                    </span>
+                    <LanguageFlag lang="ने" />
                     <span>नेपाली</span>
                   </button>
                 </div>
