@@ -47,7 +47,7 @@ function BandageBody() {
 export default function SanjeevaniLogo({ className = 'h-12 sm:h-14 w-auto' }) {
   return (
     <svg
-      viewBox="0 0 385 112"
+      viewBox="0 0 410 115"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`text-[var(--color-primary)] ${className}`}
@@ -57,7 +57,7 @@ export default function SanjeevaniLogo({ className = 'h-12 sm:h-14 w-auto' }) {
       <defs>
         {/* Mask so the front bandage cleanly overlaps the shifted back bandage on any background */}
         <mask id="sanjeevani-back-bandage-mask">
-          <rect width="385" height="112" fill="white" />
+          <rect width="410" height="115" fill="white" />
           <g transform="translate(55 58) rotate(-44)">
             <rect x="-23" y="-56" width="46" height="112" rx="23" fill="black" />
           </g>
@@ -94,18 +94,18 @@ export default function SanjeevaniLogo({ className = 'h-12 sm:h-14 w-auto' }) {
         Sanjeevani
       </text>
 
-      {/* ─── Stethoscope & Curved Tube Underline ─── */}
-      <circle cx="357" cy="22" r="2.8" fill="currentColor" />
-      <circle cx="369" cy="22" r="2.8" fill="currentColor" />
+      {/* ─── Stethoscope & Curved Tube Underline (spaced cleanly after "i") ─── */}
+      <circle cx="381" cy="22" r="2.8" fill="currentColor" />
+      <circle cx="393" cy="22" r="2.8" fill="currentColor" />
       <path
-        d="M 357 22 C 349 24, 349 51, 363 51 C 377 51, 377 24, 369 22"
+        d="M 381 22 C 373 24, 373 51, 387 51 C 401 51, 401 24, 393 22"
         stroke="currentColor"
         strokeWidth="3.5"
         strokeLinecap="round"
         fill="none"
       />
       <path
-        d="M 363 51 C 363 77, 337 81, 303 77 C 248 71, 175 73, 125 83"
+        d="M 387 51 C 387 77, 360 81, 323 77 C 263 71, 180 73, 125 83"
         stroke="currentColor"
         strokeWidth="3.5"
         strokeLinecap="round"
@@ -114,14 +114,14 @@ export default function SanjeevaniLogo({ className = 'h-12 sm:h-14 w-auto' }) {
 
       {/* ─── Tagline: "Medicine and Equipments" ─── */}
       <text
-        x="132"
-        y="103"
+        x="129"
+        y="106"
         fill="currentColor"
         fontFamily="'Plus Jakarta Sans', 'Inter', sans-serif"
         fontWeight="700"
         fontStyle="italic"
-        fontSize="16"
-        letterSpacing="0.15"
+        fontSize="19"
+        letterSpacing="0.1"
       >
         Medicine and Equipments
       </text>
