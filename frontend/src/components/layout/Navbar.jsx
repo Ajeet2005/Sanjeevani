@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext.jsx';
 import SearchBar from '../common/SearchBar.jsx';
 import LocationSelector from '../common/LocationSelector.jsx';
+import SanjeevaniLogo from '../common/SanjeevaniLogo.jsx';
 
 export default function Navbar() {
   const { cartCount } = useCart();
@@ -108,20 +109,10 @@ export default function Navbar() {
           {/* ─── Logo ─── */}
           <Link
             to="/"
-            className="flex-shrink-0 flex items-center gap-2.5 group"
+            className="flex-shrink-0 flex items-center group py-1"
             aria-label="Sanjeevani — Home"
           >
-            <div className="w-10 h-10 bg-[var(--color-primary)] rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-xs">
-              <span className="text-white font-extrabold text-xl font-[var(--font-heading)]">S</span>
-            </div>
-            <div>
-              <span className="block text-xl font-extrabold text-[var(--color-primary)] font-[var(--font-heading)] tracking-tight leading-none">
-                Sanjeevani
-              </span>
-              <span className="text-[10px] text-gray-500 font-semibold tracking-wider uppercase block mt-0.5">
-                Medicines & Rental
-              </span>
-            </div>
+            <SanjeevaniLogo className="h-11 sm:h-12 w-auto transition-transform duration-200 group-hover:scale-[1.03]" />
           </Link>
 
           {/* ─── Location Selector (hidden on small mobile) ─── */}
