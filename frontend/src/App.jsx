@@ -16,9 +16,12 @@ const LoginPage = lazy(() => import('./pages/auth/LoginPage.jsx'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage.jsx'));
 const CartPage = lazy(() => import('./pages/customer/CartPage.jsx'));
 const MedicinesPage = lazy(() => import('./pages/public/MedicinesPage.jsx'));
+const NutritionSupplementsPage = lazy(() => import('./pages/public/NutritionSupplementsPage.jsx'));
 const EquipmentPage = lazy(() => import('./pages/public/EquipmentPage.jsx'));
 const VendorsPage = lazy(() => import('./pages/public/VendorsPage.jsx'));
 const UploadPrescriptionPage = lazy(() => import('./pages/public/UploadPrescriptionPage.jsx'));
+const BlogPage = lazy(() => import('./pages/public/BlogPage.jsx'));
+const BlogPostPage = lazy(() => import('./pages/public/BlogPostPage.jsx'));
 const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage.jsx'));
 
 function App() {
@@ -30,9 +33,15 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/medicines" element={<MedicinesPage />} />
+            <Route path="/nutrition" element={<NutritionSupplementsPage />} />
+            <Route path="/health-devices" element={<MedicinesPage />} />
+            <Route path="/healthcare" element={<MedicinesPage />} />
+            <Route path="/offers" element={<MedicinesPage />} />
             <Route path="/equipment" element={<EquipmentPage />} />
             <Route path="/vendors" element={<VendorsPage />} />
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />

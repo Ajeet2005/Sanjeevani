@@ -4,7 +4,7 @@
  * Inspired by PharMeasy/1mg category bars.
  */
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 /* Category data with inline SVG icon descriptions */
 const CATEGORIES = [
@@ -21,7 +21,7 @@ const CATEGORIES = [
   {
     id: 'nutrition',
     label: 'Nutrition & Supplements',
-    href: '/medicines',
+    href: '/nutrition',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
@@ -31,7 +31,7 @@ const CATEGORIES = [
   {
     id: 'health-devices',
     label: 'Health Devices',
-    href: '/medicines',
+    href: '/health-devices',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -51,7 +51,7 @@ const CATEGORIES = [
   {
     id: 'healthcare',
     label: 'Healthcare Essentials',
-    href: '/medicines',
+    href: '/healthcare',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -61,7 +61,7 @@ const CATEGORIES = [
   {
     id: 'offers',
     label: 'Offers',
-    href: '/medicines',
+    href: '/offers',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
@@ -72,6 +72,7 @@ const CATEGORIES = [
 ];
 
 function CategoryBar() {
+  const location = useLocation();
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -119,19 +120,27 @@ function CategoryBar() {
           role="tablist"
           aria-label="Product categories"
         >
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              to={cat.href}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[var(--color-gray-600)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-50)] transition-all duration-200 whitespace-nowrap flex-shrink-0 group"
-              role="tab"
-            >
-              <span className="text-[var(--color-gray-400)] group-hover:text-[var(--color-primary)] transition-colors duration-200">
-                {cat.icon}
-              </span>
-              {cat.label}
-            </Link>
-          ))}
+          {CATEGORIES.map((cat) => {
+            const isActive = location.pathname === cat.href;
+            return (
+              <Link
+                key={cat.id}
+                to={cat.href}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm whitespace-nowrap flex-shrink-0 transition-all duration-200 group ${
+                  isActive
+                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-50)] ring-1 ring-[var(--color-primary)]/20 font-bold shadow-xs'
+                    : 'text-[var(--color-gray-600)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-50)] font-medium'
+                }`}
+                role="tab"
+                aria-selected={isActive}
+              >
+                <span className={`transition-colors duration-200 ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-gray-400)] group-hover:text-[var(--color-primary)]'}`}>
+                  {cat.icon}
+                </span>
+                {cat.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Right scroll arrow */}

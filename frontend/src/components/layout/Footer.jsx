@@ -44,6 +44,7 @@ function Footer() {
                 { label: 'Upload Prescription', href: '/upload-prescription' },
                 { label: 'Find Vendors', href: '/vendors' },
                 { label: 'Offers & Deals', href: '/medicines' },
+                { label: 'Blog', href: '/blog' },
               ].map((link) => (
                 <li key={link.href + link.label}>
                   <Link
