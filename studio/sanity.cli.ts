@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: '3k3989v2',
     dataset: 'production',
   },
+  studioHost: 'sanjeevani-health-journal',
 });
