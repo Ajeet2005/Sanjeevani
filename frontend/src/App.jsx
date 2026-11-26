@@ -20,6 +20,8 @@ const NutritionSupplementsPage = lazy(() => import('./pages/public/NutritionSupp
 const EquipmentPage = lazy(() => import('./pages/public/EquipmentPage.jsx'));
 const VendorsPage = lazy(() => import('./pages/public/VendorsPage.jsx'));
 const UploadPrescriptionPage = lazy(() => import('./pages/public/UploadPrescriptionPage.jsx'));
+const BlogPage = lazy(() => import('./pages/public/BlogPage.jsx'));
+const BlogPostPage = lazy(() => import('./pages/public/BlogPostPage.jsx'));
 const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage.jsx'));
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
             <Route path="/equipment" element={<EquipmentPage />} />
             <Route path="/vendors" element={<VendorsPage />} />
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
