@@ -8,4 +8,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    port: 5173,
+    strictPort: true, // Guarantees Vite ALWAYS stays on 5173 and never changes port
+  },
 });

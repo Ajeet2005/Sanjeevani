@@ -4,7 +4,7 @@
  * search, and 3-column article grid blended with Sanjeevani healthcare blue tones.
  */
 import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getAllPosts, urlFor } from '../../lib/sanity.js';
 
 function formatDate(dateStr) {
@@ -17,9 +17,10 @@ function formatDate(dateStr) {
 }
 
 export default function BlogPage() {
+  const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedTag, setSelectedTag] = useState('');
   const [catOpen, setCatOpen] = useState(true);
@@ -27,12 +28,20 @@ export default function BlogPage() {
   const [showAllCats, setShowAllCats] = useState(false);
 
   useEffect(() => {
+    const q = searchParams.get('q');
+    if (q !== null) {
+      setSearchQuery(q);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     let active = true;
     getAllPosts()
       .then((data) => {
         if (active) setPosts(Array.isArray(data) ? data : []);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('Error fetching articles from Sanity:', err);
         if (active) setPosts([]);
       })
       .finally(() => {

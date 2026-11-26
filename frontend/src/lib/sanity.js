@@ -5,7 +5,7 @@ export const sanityClient = createClient({
   projectId: import.meta.env.VITE_SANITY_PROJECT_ID || '3k3989v2',
   dataset: import.meta.env.VITE_SANITY_DATASET || 'production',
   apiVersion: import.meta.env.VITE_SANITY_API_VERSION || '2025-02-19',
-  useCdn: true,
+  useCdn: false, // Set to false so newly published articles appear immediately without CDN cache delay
 });
 
 const builder = createImageUrlBuilder(sanityClient);
@@ -47,5 +47,14 @@ export function getPostBySlug(slug) {
       "authorBio": author->bio
     }`,
     { slug }
+  );
+}
+
+export function getRelatedPosts(currentSlug, limit = 3) {
+  return sanityClient.fetch(
+    `*[_type == "post" && defined(slug.current) && slug.current != $currentSlug] | order(publishedAt desc)[0...$limit] {
+      ${POST_CARD_FIELDS}
+    }`,
+    { currentSlug, limit }
   );
 }
