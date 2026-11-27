@@ -491,51 +491,43 @@ export default function SanjeevaniPlusPage() {
           </div>
         </section>
 
-        {/* ═══ VISUAL BANNER — Bright, crisp split design (no monochrome blue wash) ═══ */}
+        {/* ═══ VISUAL BANNER — Single seamless full-width bright banner ═══ */}
         <section
           aria-label="Healthcare for Every Family"
-          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FFF7ED] via-[#EFF6FF] to-[#DBEAFE] border border-blue-200/70 shadow-sm"
+          className="relative rounded-3xl overflow-hidden min-h-[250px] sm:min-h-[270px] flex items-center border border-amber-200/60 shadow-sm"
         >
-          {/* Decorative background curves */}
-          <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#1A56DB]/10 pointer-events-none" />
-          <div className="absolute -top-12 left-1/3 w-56 h-56 rounded-full bg-amber-300/20 pointer-events-none" />
+          <img
+            src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1400&h=500&fit=crop&q=85"
+            alt="Medicines and healthcare supplies for every family"
+            className="absolute inset-0 w-full h-full object-cover object-right"
+            loading="lazy"
+          />
+          {/* Smooth bright fade from crisp white/warm-cream on left to completely clear photo on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF]/95 via-[#FFFBF2]/82 via-50% to-transparent" />
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 items-center">
-            {/* Left — Crisp, unobstructed realistic healthcare image */}
-            <div className="md:col-span-5 h-56 sm:h-64 md:h-72 overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=900&h=650&fit=crop&q=85"
-                alt="Medicines and healthcare supplies for every family"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-
-            {/* Right — High-contrast crisp editorial content */}
-            <div className="md:col-span-7 p-7 sm:p-10 md:px-12 flex flex-col justify-center">
-              <span className="inline-flex items-center gap-1.5 self-start bg-[var(--color-primary)] text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs mb-3">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" /></svg>
-                All-In-One Care Plan
+          <div className="relative z-10 px-7 sm:px-12 py-8 max-w-2xl">
+            <span className="inline-flex items-center gap-1.5 bg-[var(--color-primary)] text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs mb-3">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" /></svg>
+              All-In-One Care Plan
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 font-[var(--font-heading)] leading-snug">
+              Healthcare for every family in{' '}
+              <span className="text-[var(--color-primary)]">Nepal</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-700 mt-2.5 leading-relaxed max-w-lg">
+              From daily prescriptions to home medical equipment — save 5% instantly plus free delivery and setup with one transparent membership.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <a
+                href="#plans"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all"
+              >
+                Choose Your Plan
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+              </a>
+              <span className="text-xs font-semibold text-gray-600">
+                Fast. Transparent. Across Nepal.
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 font-[var(--font-heading)] leading-snug">
-                Healthcare for every family in{' '}
-                <span className="text-[var(--color-primary)]">Nepal</span>
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 mt-2.5 leading-relaxed max-w-xl">
-                From daily prescriptions to home medical equipment — save 5% instantly plus free delivery and setup with one transparent membership.
-              </p>
-              <div className="mt-5 flex flex-wrap items-center gap-4">
-                <a
-                  href="#plans"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all"
-                >
-                  Choose Your Plan
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                </a>
-                <span className="text-xs font-semibold text-gray-500">
-                  Fast. Transparent. Across Nepal.
-                </span>
-              </div>
             </div>
           </div>
         </section>
