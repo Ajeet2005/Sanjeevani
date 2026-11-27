@@ -68,31 +68,31 @@ const FAQS = [
   },
 ];
 
-/* ─── Benefit visual cards data ─── */
+/* ─── Benefit visual cards data (clear realistic photos, no color wash) ─── */
 const BENEFIT_CARDS = [
   {
     title: 'Free Delivery',
-    desc: 'Save on every order with free doorstep delivery across Nepal.',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop&q=80',
-    gradient: 'from-sky-500/90 to-blue-700/90',
+    tag: 'Doorstep Across Nepal',
+    desc: 'Save on every order with fast, zero-hassle doorstep delivery.',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop&q=85',
   },
   {
     title: 'Equipment Installation',
+    tag: 'Certified Setup',
     desc: 'Professional setup of medical devices at your home, free of charge.',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop&q=80',
-    gradient: 'from-emerald-500/90 to-teal-700/90',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop&q=85',
   },
   {
     title: 'Reward Points',
-    desc: 'Earn 2x–3x points on every purchase. Redeem on future orders.',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&q=80',
-    gradient: 'from-amber-500/90 to-orange-700/90',
+    tag: '2x – 3x Multiplier',
+    desc: 'Earn points on every purchase and redeem directly on future orders.',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop&q=85',
   },
   {
     title: 'Family Coverage',
-    desc: 'Plus Pro covers up to 4 family members under one plan.',
-    image: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop&q=80',
-    gradient: 'from-violet-500/90 to-purple-700/90',
+    tag: 'Up to 4 Profiles',
+    desc: 'Plus Pro protects up to 4 family members under one membership.',
+    image: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&h=400&fit=crop&q=85',
   },
 ];
 
@@ -136,7 +136,7 @@ function useInView(options = {}) {
     if (!el) return;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) { setIsVisible(true); obs.unobserve(el); }
-    }, { threshold: 0.15, ...options });
+    }, { threshold: 0.12, ...options });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -232,60 +232,58 @@ export default function SanjeevaniPlusPage() {
   const activePlan = PLANS.find((p) => p.id === selectedPlanId) || PLANS[1];
 
   return (
-    <div className="bg-[#F8FAFC] min-h-screen pb-16">
+    <div className="bg-[#F8FAFC] min-h-screen pb-28">
       {/* Inline keyframes for animations */}
       <style>{`
         @keyframes float-particle { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-30px) scale(1.15); } }
         @keyframes shimmer-btn { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-        @keyframes draw-check { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }
         @keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.6); opacity: 0; } }
         @keyframes card-glow { 0%, 100% { box-shadow: 0 0 20px rgba(26, 86, 219, 0.08); } 50% { box-shadow: 0 0 40px rgba(26, 86, 219, 0.18); } }
-        @keyframes slide-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slide-left { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slide-left { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes count-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes count-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
         .animate-slide-up { animation: slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-slide-left { animation: slide-left 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-fade { animation: fade-in 0.6s ease forwards; }
-        .shimmer-btn { background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%); background-size: 200% 100%; animation: shimmer-btn 2.5s ease-in-out infinite; }
+        .shimmer-btn { background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%); background-size: 200% 100%; animation: shimmer-btn 2.5s ease-in-out infinite; }
         .card-hover-lift { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
-        .card-hover-lift:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 60px rgba(26, 86, 219, 0.15); }
+        .card-hover-lift:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 55px rgba(26, 86, 219, 0.14); }
         .plan-glow { animation: card-glow 3s ease-in-out infinite; }
       `}</style>
 
-      {/* ═══ HERO — Full-bleed image with overlay ═══ */}
+      {/* ═══ HERO — Full-bleed image with Sanjeevani Blue accent ═══ */}
       <section
         ref={heroRef}
-        className="relative min-h-[520px] sm:min-h-[560px] flex items-center overflow-hidden"
+        className="relative min-h-[500px] sm:min-h-[540px] flex items-center overflow-hidden"
       >
-        {/* Background image */}
         <img
-          src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1600&h=900&fit=crop&q=80"
+          src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1600&h=900&fit=crop&q=85"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081F5F]/92 via-[#0C2D7F]/85 to-[var(--color-primary)]/70" />
+        {/* Balanced readability overlay in Sanjeevani brand blue */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#103A9E]/90 via-[#1A56DB]/75 to-[#1A56DB]/35" />
 
         <FloatingParticles />
 
         <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center w-full ${heroVisible ? 'animate-fade' : 'opacity-0'}`}>
           {/* Left — Text */}
           <div className={heroVisible ? 'animate-slide-up' : 'opacity-0'}>
-            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/25 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase mb-5">
+            <div className="inline-flex items-center gap-2 text-white bg-white/15 backdrop-blur-md border border-white/30 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase mb-5">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" style={{ animation: 'pulse-ring 1.5s infinite' }} />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400" />
               </span>
-              Sanjeevani Plus Membership
+              <span className="text-white">Sanjeevani Plus Membership</span>
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-white leading-[1.1] font-[var(--font-heading)]">
               Save more on every{' '}
               <span className="text-amber-300">medicine</span> &amp;{' '}
-              <span className="text-sky-300">equipment</span> order
+              <span className="text-sky-200">equipment</span> order
             </h1>
-            <p className="text-sm sm:text-base text-blue-100/90 mt-5 max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base text-blue-50 mt-5 max-w-xl leading-relaxed">
               Simple, transparent 3-month healthcare plans starting at{' '}
               <strong className="text-white font-extrabold">Rs. 199</strong>. Enjoy 5% off all products, free doorstep delivery, free equipment installation, and reward points — because your health shouldn't cost more than it has to.
             </p>
@@ -300,37 +298,21 @@ export default function SanjeevaniPlusPage() {
               </a>
               <a
                 href="#calculator"
-                className="px-7 py-3.5 bg-white/12 hover:bg-white/22 text-white font-bold text-sm rounded-2xl border border-white/25 backdrop-blur-sm transition-all"
+                className="px-7 py-3.5 bg-white/15 hover:bg-white/25 text-white font-bold text-sm rounded-2xl border border-white/30 backdrop-blur-sm transition-all"
               >
                 Calculate Your Savings
               </a>
             </div>
-
-            {/* Trust badges */}
-            <div className="flex items-center gap-6 mt-9 text-xs text-blue-200/80">
-              <div className="flex items-center gap-1.5">
-                <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
-                Licensed Pharmacies
-              </div>
-              <div className="flex items-center gap-1.5">
-                <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd" /></svg>
-                Secure Payments
-              </div>
-              <div className="flex items-center gap-1.5">
-                <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clipRule="evenodd" /></svg>
-                Transparent Pricing
-              </div>
-            </div>
           </div>
 
           {/* Right — Feature highlight image card */}
-          <div className={`hidden lg:block ${heroVisible ? 'animate-slide-left' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+          <div className={`hidden lg:block ${heroVisible ? 'animate-slide-left' : 'opacity-0'}`} style={{ animationDelay: '0.25s' }}>
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-amber-400/20 to-sky-400/20 rounded-[2rem] blur-2xl" />
               <img
-                src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=450&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=450&fit=crop&q=85"
                 alt="Medicine delivery and healthcare services"
-                className="relative rounded-3xl shadow-2xl border-2 border-white/15 w-full object-cover h-[380px]"
+                className="relative rounded-3xl shadow-2xl border-2 border-white/25 w-full object-cover h-[380px]"
               />
               {/* Floating stat card */}
               <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-gray-100" style={{ animation: 'float-particle 3s ease-in-out infinite alternate' }}>
@@ -373,7 +355,7 @@ export default function SanjeevaniPlusPage() {
           </div>
         )}
 
-        {/* ═══ BENEFIT CARDS — Visual image-driven grid ═══ */}
+        {/* ═══ BENEFIT CARDS — Crystal-clear realistic visuals (no color wash) ═══ */}
         <section ref={benefitsRef} aria-label="Membership Benefits">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--color-primary)]">Why Join</span>
@@ -381,30 +363,36 @@ export default function SanjeevaniPlusPage() {
               Benefits that make healthcare affordable
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {BENEFIT_CARDS.map((card, i) => (
               <div
                 key={card.title}
-                className={`relative group rounded-3xl overflow-hidden h-64 card-hover-lift cursor-default ${benefitsVisible ? 'animate-slide-up' : 'opacity-0'}`}
+                className={`group rounded-3xl overflow-hidden bg-white border border-gray-200/80 shadow-sm card-hover-lift cursor-default flex flex-col ${benefitsVisible ? 'animate-slide-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${i * 0.12}s` }}
               >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${card.gradient}`} />
-                <div className="relative z-10 flex flex-col justify-end h-full p-5 text-white">
-                  <h3 className="text-lg font-extrabold">{card.title}</h3>
-                  <p className="text-xs text-white/85 mt-1 leading-relaxed">{card.desc}</p>
+                <div className="relative h-44 w-full overflow-hidden">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5 flex-1 flex flex-col justify-between bg-white">
+                  <div>
+                    <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider text-[var(--color-primary)] bg-blue-50 px-2.5 py-1 rounded-full mb-2">
+                      {card.tag}
+                    </span>
+                    <h3 className="text-lg font-extrabold text-gray-900 font-[var(--font-heading)]">{card.title}</h3>
+                    <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">{card.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ═══ 2-TIER PRICING CARDS — Upgraded with animations ═══ */}
+        {/* ═══ 2-TIER PRICING CARDS ═══ */}
         <section ref={plansRef} id="plans" aria-label="Membership Plans">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--color-primary)]">Choose Your Plan</span>
@@ -436,11 +424,10 @@ export default function SanjeevaniPlusPage() {
                     </span>
                   )}
 
-                  {/* Plan header with image strip */}
                   <div>
                     <div className="flex items-center gap-4 mb-5">
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm ${
-                        plan.highlight ? 'bg-gradient-to-br from-[var(--color-primary)] to-sky-500 text-white' : 'bg-blue-50 text-[var(--color-primary)]'
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0 ${
+                        plan.highlight ? 'bg-gradient-to-br from-[var(--color-primary)] to-[#4B83ED] text-white' : 'bg-blue-50 text-[var(--color-primary)]'
                       }`}>
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
@@ -454,7 +441,6 @@ export default function SanjeevaniPlusPage() {
                       </div>
                     </div>
 
-                    {/* Price */}
                     <div className="pb-6 border-b border-gray-100 flex items-baseline gap-2">
                       <span className="text-4xl sm:text-5xl font-black text-[var(--color-primary)] font-[var(--font-heading)]">
                         Rs. {plan.price}
@@ -465,7 +451,6 @@ export default function SanjeevaniPlusPage() {
                       </span>
                     </div>
 
-                    {/* Features with icons */}
                     <ul className="mt-6 space-y-3.5">
                       {plan.features.map((feat, fi) => (
                         <li
@@ -484,7 +469,6 @@ export default function SanjeevaniPlusPage() {
                     </ul>
                   </div>
 
-                  {/* CTA button */}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -507,24 +491,54 @@ export default function SanjeevaniPlusPage() {
           </div>
         </section>
 
-        {/* ═══ VISUAL DIVIDER — Full-width healthcare image ═══ */}
-        <div className="relative rounded-3xl overflow-hidden h-56 sm:h-72">
-          <img
-            src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&h=400&fit=crop&q=80"
-            alt="Healthcare products and medicines"
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#081F5F]/85 via-[#0C2D7F]/75 to-transparent" />
-          <div className="relative z-10 flex flex-col justify-center h-full px-8 sm:px-14 max-w-lg">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-[var(--font-heading)]">
-              Healthcare for every family in Nepal
-            </h3>
-            <p className="text-xs sm:text-sm text-blue-100/90 mt-3 leading-relaxed">
-              From daily medicines to medical equipment — save on everything your household needs with one simple plan.
-            </p>
+        {/* ═══ VISUAL BANNER — Bright, crisp split design (no monochrome blue wash) ═══ */}
+        <section
+          aria-label="Healthcare for Every Family"
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FFF7ED] via-[#EFF6FF] to-[#DBEAFE] border border-blue-200/70 shadow-sm"
+        >
+          {/* Decorative background curves */}
+          <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#1A56DB]/10 pointer-events-none" />
+          <div className="absolute -top-12 left-1/3 w-56 h-56 rounded-full bg-amber-300/20 pointer-events-none" />
+
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 items-center">
+            {/* Left — Crisp, unobstructed realistic healthcare image */}
+            <div className="md:col-span-5 h-56 sm:h-64 md:h-72 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=900&h=650&fit=crop&q=85"
+                alt="Medicines and healthcare supplies for every family"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Right — High-contrast crisp editorial content */}
+            <div className="md:col-span-7 p-7 sm:p-10 md:px-12 flex flex-col justify-center">
+              <span className="inline-flex items-center gap-1.5 self-start bg-[var(--color-primary)] text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs mb-3">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" /></svg>
+                All-In-One Care Plan
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 font-[var(--font-heading)] leading-snug">
+                Healthcare for every family in{' '}
+                <span className="text-[var(--color-primary)]">Nepal</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 mt-2.5 leading-relaxed max-w-xl">
+                From daily prescriptions to home medical equipment — save 5% instantly plus free delivery and setup with one transparent membership.
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <a
+                  href="#plans"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all"
+                >
+                  Choose Your Plan
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                </a>
+                <span className="text-xs font-semibold text-gray-500">
+                  Fast. Transparent. Across Nepal.
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* ═══ INTERACTIVE SAVINGS CALCULATOR ═══ */}
         <section
@@ -533,7 +547,6 @@ export default function SanjeevaniPlusPage() {
           className={`bg-white rounded-3xl border border-gray-200/80 p-6 sm:p-10 shadow-sm overflow-hidden relative ${calcVisible ? 'animate-slide-up' : 'opacity-0'}`}
           aria-label="Savings Calculator"
         >
-          {/* Background pattern */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-50 to-transparent rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
           <div className="relative z-10">
@@ -591,8 +604,10 @@ export default function SanjeevaniPlusPage() {
                     <span className="text-xs sm:text-sm font-bold text-gray-800">
                       Include medical equipment rental?
                     </span>
-                    <div className={`relative w-11 h-6 rounded-full transition-colors ${usesEquipmentRental ? 'bg-[var(--color-primary)]' : 'bg-gray-300'}`}
-                      onClick={() => setUsesEquipmentRental(!usesEquipmentRental)}>
+                    <div
+                      className={`relative w-11 h-6 rounded-full transition-colors ${usesEquipmentRental ? 'bg-[var(--color-primary)]' : 'bg-gray-300'}`}
+                      onClick={() => setUsesEquipmentRental(!usesEquipmentRental)}
+                    >
                       <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${usesEquipmentRental ? 'translate-x-5.5' : 'translate-x-0.5'}`} />
                     </div>
                   </label>
@@ -613,22 +628,22 @@ export default function SanjeevaniPlusPage() {
                 </div>
               </div>
 
-              {/* Result card */}
-              <div className="lg:col-span-5 bg-gradient-to-br from-[#081F5F] via-[#0C2D7F] to-[var(--color-primary)] text-white rounded-3xl p-6 sm:p-7 shadow-xl space-y-5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-28 h-28 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+              {/* Result card — Sanjeevani Logo primary blue tone (#1A56DB -> #4B83ED), lighter & vibrant */}
+              <div className="lg:col-span-5 bg-gradient-to-br from-[#1A56DB] via-[#2563EB] to-[#4B83ED] text-white rounded-3xl p-6 sm:p-7 shadow-xl space-y-5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-28 h-28 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between border-b border-white/20 pb-4">
+                  <div className="flex items-center justify-between border-b border-white/25 pb-4">
                     <div>
-                      <p className="text-xs text-blue-200 uppercase font-bold tracking-wider">
+                      <p className="text-xs text-blue-100 uppercase font-bold tracking-wider">
                         Estimated 3-Month Net Benefit
                       </p>
                       <p className="text-3xl sm:text-4xl font-black mt-1" style={{ animation: 'count-pulse 2s ease-in-out infinite' }}>
                         Rs. <AnimatedCounter target={Math.max(0, selectedPlanId === 'plus' ? calc.plusNet : calc.proNet)} />
                       </p>
                     </div>
-                    <div className="flex bg-white/15 rounded-xl p-1 text-xs font-bold">
+                    <div className="flex bg-white/20 rounded-xl p-1 text-xs font-bold">
                       <button
                         type="button" onClick={() => setSelectedPlanId('plus')}
                         className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${selectedPlanId === 'plus' ? 'bg-white text-[var(--color-primary)]' : 'text-white'}`}
@@ -641,23 +656,23 @@ export default function SanjeevaniPlusPage() {
                   </div>
 
                   <div className="space-y-2.5 text-xs sm:text-sm mt-5">
-                    <div className="flex justify-between text-blue-100">
+                    <div className="flex justify-between text-blue-50">
                       <span>5% Extra Product Discount</span>
                       <span className="font-bold text-white">+ Rs. {calc.productDiscount.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-blue-100">
+                    <div className="flex justify-between text-blue-50">
                       <span>Delivery Fee Savings</span>
                       <span className="font-bold text-white">
                         + Rs. {(selectedPlanId === 'plus' ? calc.plusDeliverySaved : calc.proDeliverySaved).toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between text-blue-100">
+                    <div className="flex justify-between text-blue-50">
                       <span>Installation &amp; Rental Savings</span>
                       <span className="font-bold text-white">
                         + Rs. {(selectedPlanId === 'plus' ? calc.plusInstallSaved : calc.proEquipmentSaved).toLocaleString()}
                       </span>
                     </div>
-                    <div className="flex justify-between text-blue-200 pt-3 border-t border-white/15">
+                    <div className="flex justify-between text-blue-100 pt-3 border-t border-white/20">
                       <span>{activePlan.name} 3-month fee</span>
                       <span className="font-semibold">- Rs. {activePlan.price}</span>
                     </div>
@@ -666,7 +681,7 @@ export default function SanjeevaniPlusPage() {
                   <button
                     type="button"
                     onClick={() => setActivatedPlan(activePlan)}
-                    className="relative w-full py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-950 font-extrabold text-sm rounded-2xl transition-colors cursor-pointer mt-6 overflow-hidden"
+                    className="relative w-full py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-950 font-extrabold text-sm rounded-2xl transition-colors cursor-pointer mt-6 overflow-hidden shadow-md"
                   >
                     <span className="relative z-10">Get {activePlan.name} for Rs. {activePlan.price}</span>
                     <span className="absolute inset-0 shimmer-btn" />
@@ -715,6 +730,28 @@ export default function SanjeevaniPlusPage() {
             </Link>
           </div>
         </section>
+      </div>
+
+      {/* ═══ STICKY STATIC BOTTOM BAR — Always visible across scroll ═══ */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-50 bg-[#0B1739]/95 backdrop-blur-md border-t border-white/10 py-3 px-4 shadow-[0_-8px_30px_rgba(8,31,95,0.28)]"
+        role="region"
+        aria-label="Membership Call to Action"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <a
+            href="#plans"
+            className="relative group inline-flex flex-col items-center justify-center px-10 py-2 rounded-xl bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#F59E0B] text-gray-950 shadow-[0_0_24px_rgba(251,191,36,0.45)] hover:shadow-[0_0_34px_rgba(251,191,36,0.75)] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] overflow-hidden cursor-pointer"
+          >
+            <span className="relative z-10 text-sm sm:text-base font-extrabold tracking-tight leading-tight">
+              Become a Plus Member
+            </span>
+            <span className="relative z-10 text-[11px] font-bold text-gray-900/85">
+              Starting at Rs. 66/month
+            </span>
+            <span className="absolute inset-0 shimmer-btn" />
+          </a>
+        </div>
       </div>
     </div>
   );
