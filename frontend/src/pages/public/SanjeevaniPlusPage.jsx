@@ -190,6 +190,7 @@ function FloatingParticles() {
 export default function SanjeevaniPlusPage() {
   const [selectedPlanId, setSelectedPlanId] = useState('plus-pro');
   const [activatedPlan, setActivatedPlan] = useState(null);
+  const [footerInView, setFooterInView] = useState(false);
 
   // Savings Calculator
   const [monthlyMedSpend, setMonthlyMedSpend] = useState(3000);
@@ -203,6 +204,18 @@ export default function SanjeevaniPlusPage() {
   const [benefitsRef, benefitsVisible] = useInView();
   const [calcRef, calcVisible] = useInView();
   const [faqRef, faqVisible] = useInView();
+
+  // Hide sticky CTA bar once the footer reaches the viewport
+  useEffect(() => {
+    const footerEl = document.querySelector('footer');
+    if (!footerEl) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setFooterInView(entry.isIntersecting),
+      { threshold: 0.02 }
+    );
+    obs.observe(footerEl);
+    return () => obs.disconnect();
+  }, []);
 
   const calc = useMemo(() => {
     const threeMonthMed = monthlyMedSpend * 3;
@@ -232,7 +245,7 @@ export default function SanjeevaniPlusPage() {
   const activePlan = PLANS.find((p) => p.id === selectedPlanId) || PLANS[1];
 
   return (
-    <div className="bg-[#F8FAFC] min-h-screen pb-28">
+    <div className="bg-[#F8FAFC] min-h-screen pb-24">
       {/* Inline keyframes for animations */}
       <style>{`
         @keyframes float-particle { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-30px) scale(1.15); } }
@@ -263,7 +276,6 @@ export default function SanjeevaniPlusPage() {
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        {/* Balanced readability overlay in Sanjeevani brand blue */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#103A9E]/90 via-[#1A56DB]/75 to-[#1A56DB]/35" />
 
         <FloatingParticles />
@@ -491,19 +503,19 @@ export default function SanjeevaniPlusPage() {
           </div>
         </section>
 
-        {/* ═══ VISUAL BANNER — Single seamless full-width bright banner ═══ */}
+        {/* ═══ VISUAL BANNER — Single seamless full-width bluish healthcare visual ═══ */}
         <section
           aria-label="Healthcare for Every Family"
-          className="relative rounded-3xl overflow-hidden min-h-[250px] sm:min-h-[270px] flex items-center border border-amber-200/60 shadow-sm"
+          className="relative rounded-3xl overflow-hidden min-h-[250px] sm:min-h-[270px] flex items-center border border-blue-200/70 shadow-sm bg-[#EFF6FF]"
         >
           <img
-            src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1400&h=500&fit=crop&q=85"
-            alt="Medicines and healthcare supplies for every family"
+            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&h=500&fit=crop&q=85"
+            alt="Healthcare professionals and medical support across Nepal"
             className="absolute inset-0 w-full h-full object-cover object-right"
             loading="lazy"
           />
-          {/* Smooth bright fade from crisp white/warm-cream on left to completely clear photo on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF]/95 via-[#FFFBF2]/82 via-50% to-transparent" />
+          {/* Smooth bright bluish-white fade on left blending seamlessly into clear visual on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#EFF6FF]/96 via-[#EBF2FF]/85 via-50% to-transparent" />
 
           <div className="relative z-10 px-7 sm:px-12 py-8 max-w-2xl">
             <span className="inline-flex items-center gap-1.5 bg-[var(--color-primary)] text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-xs mb-3">
@@ -517,7 +529,7 @@ export default function SanjeevaniPlusPage() {
             <p className="text-xs sm:text-sm text-gray-700 mt-2.5 leading-relaxed max-w-lg">
               From daily prescriptions to home medical equipment — save 5% instantly plus free delivery and setup with one transparent membership.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-4">
+            <div className="mt-5">
               <a
                 href="#plans"
                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-600)] text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all"
@@ -525,9 +537,6 @@ export default function SanjeevaniPlusPage() {
                 Choose Your Plan
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
               </a>
-              <span className="text-xs font-semibold text-gray-600">
-                Fast. Transparent. Across Nepal.
-              </span>
             </div>
           </div>
         </section>
@@ -620,7 +629,7 @@ export default function SanjeevaniPlusPage() {
                 </div>
               </div>
 
-              {/* Result card — Sanjeevani Logo primary blue tone (#1A56DB -> #4B83ED), lighter & vibrant */}
+              {/* Result card — Sanjeevani Logo primary blue tone */}
               <div className="lg:col-span-5 bg-gradient-to-br from-[#1A56DB] via-[#2563EB] to-[#4B83ED] text-white rounded-3xl p-6 sm:p-7 shadow-xl space-y-5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-28 h-28 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -724,21 +733,24 @@ export default function SanjeevaniPlusPage() {
         </section>
       </div>
 
-      {/* ═══ STICKY STATIC BOTTOM BAR — Always visible across scroll ═══ */}
+      {/* ═══ STICKY WHITE BOTTOM BAR — Hides cleanly once footer is reached ═══ */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-50 bg-[#0B1739]/95 backdrop-blur-md border-t border-white/10 py-3 px-4 shadow-[0_-8px_30px_rgba(8,31,95,0.28)]"
+        className={`fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200 py-3 px-4 shadow-[0_-6px_25px_rgba(26,86,219,0.10)] transition-all duration-300 ${
+          footerInView ? 'opacity-0 translate-y-full pointer-events-none' : 'opacity-100 translate-y-0'
+        }`}
         role="region"
         aria-label="Membership Call to Action"
+        aria-hidden={footerInView}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-center">
           <a
             href="#plans"
-            className="relative group inline-flex flex-col items-center justify-center px-10 py-2 rounded-xl bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#F59E0B] text-gray-950 shadow-[0_0_24px_rgba(251,191,36,0.45)] hover:shadow-[0_0_34px_rgba(251,191,36,0.75)] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] overflow-hidden cursor-pointer"
+            className="relative group inline-flex flex-col items-center justify-center px-10 py-2 rounded-xl bg-gradient-to-r from-[#1A56DB] via-[#2563EB] to-[#1A56DB] hover:from-[#1548BE] hover:to-[#1A56DB] text-white shadow-[0_6px_22px_rgba(26,86,219,0.35)] hover:shadow-[0_8px_28px_rgba(26,86,219,0.5)] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] overflow-hidden cursor-pointer"
           >
-            <span className="relative z-10 text-sm sm:text-base font-extrabold tracking-tight leading-tight">
+            <span className="relative z-10 text-sm sm:text-base font-extrabold tracking-tight leading-tight text-white">
               Become a Plus Member
             </span>
-            <span className="relative z-10 text-[11px] font-bold text-gray-900/85">
+            <span className="relative z-10 text-[11px] font-semibold text-blue-100">
               Starting at Rs. 66/month
             </span>
             <span className="absolute inset-0 shimmer-btn" />
