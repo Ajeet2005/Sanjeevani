@@ -22,6 +22,7 @@ const VendorsPage = lazy(() => import('./pages/public/VendorsPage.jsx'));
 const UploadPrescriptionPage = lazy(() => import('./pages/public/UploadPrescriptionPage.jsx'));
 const BlogPage = lazy(() => import('./pages/public/BlogPage.jsx'));
 const BlogPostPage = lazy(() => import('./pages/public/BlogPostPage.jsx'));
+const SanjeevaniPlusPage = lazy(() => import('./pages/public/SanjeevaniPlusPage.jsx'));
 const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage.jsx'));
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/upload-prescription" element={<UploadPrescriptionPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/plus" element={<SanjeevaniPlusPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
